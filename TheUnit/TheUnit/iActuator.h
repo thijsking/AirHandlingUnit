@@ -3,6 +3,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
+#include "PWM.h"
+#include "I2C.h"
+#include "Serial.h"
+
 
 using namespace std;
 
@@ -11,13 +16,13 @@ class iCommunication;
 class iActuator
 {
 public:
-	virtual ~iActuator() = 0;
-	virtual void Initialize() = 0;
-	virtual void SetValue(int) = 0;
+	iActuator();
+	virtual ~iActuator();
+	virtual void Initialize(string);
+	virtual void SetValue(int);
 protected:
 	iCommunication *Communication;
 };
-
 
 
 #endif

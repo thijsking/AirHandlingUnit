@@ -5,8 +5,12 @@
 
 class Serial : public iCommunication
 {
+public:
 	Serial();
 	virtual ~Serial();
+	virtual void Initialize();
+	virtual void Write(int);
+	virtual int Read();
 };
 
 

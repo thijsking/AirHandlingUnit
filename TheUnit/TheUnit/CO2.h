@@ -6,8 +6,9 @@
 class CO2 : public iSensor
 {
 public:
-	CO2();
+	CO2(string);
 	virtual  ~CO2();
+	virtual void Initialize(string);
 };
 
 

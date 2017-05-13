@@ -15,7 +15,6 @@ public:
 	virtual Controller GetController();
 	static void Dispose();
 private:
-	Controller BuildController();
 	static Controller *Instance;
 };
 

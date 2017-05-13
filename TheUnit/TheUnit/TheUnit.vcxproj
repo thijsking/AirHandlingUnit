@@ -81,7 +81,16 @@
     <ClInclude Include="Temperature.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CO2.cpp" />
     <ClCompile Include="ControllerBuilder.cpp" />
+    <ClCompile Include="CoolingElement.cpp" />
+    <ClCompile Include="Fan.cpp" />
+    <ClCompile Include="Flaps.cpp" />
+    <ClCompile Include="HeatingElement.cpp" />
+    <ClCompile Include="Humidity.cpp" />
+    <ClCompile Include="iActuator.cpp" />
+    <ClCompile Include="iSensor.cpp" />
+    <ClCompile Include="Temperature.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

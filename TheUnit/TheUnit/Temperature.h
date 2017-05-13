@@ -6,8 +6,9 @@
 class Temperature : public iSensor
 {
 public:
-	Temperature();
+	Temperature(string);
 	virtual  ~Temperature();
+	virtual void Initialize(string);
 };
 
 

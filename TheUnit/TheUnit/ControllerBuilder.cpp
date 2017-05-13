@@ -18,12 +18,6 @@ Controller ControllerBuilder::GetController()
 	return *Instance;
 }
 
-Controller ControllerBuilder::BuildController()
-{
-	// alleen nodig als er meerdere dingen nog moeten worden meegegeven aan de controller
-	// nieuwe objecten ofzo
-}
-
 void ControllerBuilder::Dispose()
 {
 	Instance = NULL;

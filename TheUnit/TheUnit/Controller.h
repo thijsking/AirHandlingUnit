@@ -3,6 +3,9 @@
 
 #include <stdio.h>;
 #include <stdlib.h>;
+#include <map>
+#include "iSensor.h"
+#include "iActuator.h"
 
 using namespace std;
 
@@ -13,7 +16,8 @@ public:
 	virtual ~Controller();
 	virtual void Initialze();
 private:
-	// list ofzo van alle onderdelen/components
+	map<string, iSensor*> SensorMap;
+	map<string, iActuator*> ActuatorMap;
 };
 
 

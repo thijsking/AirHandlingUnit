@@ -3,6 +3,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
+#include "PWM.h"
+#include "I2C.h"
+#include "Serial.h"
 
 using namespace std;
 
@@ -11,9 +15,10 @@ class iCommunication;
 class iSensor
 {
 public:
-	virtual ~iSensor() = 0;
-	virtual void Initialize() = 0;
-	virtual int GetValue() = 0;
+	iSensor();
+	virtual ~iSensor();
+	virtual void Initialize(string);
+	virtual int GetValue();
 protected:
 	iCommunication *Communication;
 

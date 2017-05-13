@@ -6,8 +6,9 @@
 class Fan : public iActuator
 {
 public:
-	Fan();
+	Fan(string);
 	virtual	 ~Fan();
+	virtual void Initialize(string);
 };
 
 

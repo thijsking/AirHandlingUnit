@@ -6,8 +6,9 @@
 class Flaps : public iActuator
 {
 public:
-	Flaps();
+	Flaps(string);
 	virtual	 ~Flaps();
+	virtual void Initialize(string);
 };
 
 

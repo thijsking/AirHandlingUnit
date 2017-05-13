@@ -5,8 +5,13 @@
 
 class I2C : public iCommunication
 {
+	
+public:
 	I2C();
 	virtual ~I2C();
+	virtual void Initialize();
+	virtual void Write(int);
+	virtual int Read();
 };
 
 

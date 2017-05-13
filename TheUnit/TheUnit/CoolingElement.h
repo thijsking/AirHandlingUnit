@@ -6,8 +6,9 @@
 class CoolingElement : public iActuator
 {
 public:
-	CoolingElement();
+	CoolingElement(string);
 	virtual	 ~CoolingElement();
+	virtual void Initialize(string);
 };
 
 
