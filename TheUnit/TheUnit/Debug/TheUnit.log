@@ -1,57 +1,7 @@
-﻿Build started 10-5-2017 13:51:56.
+﻿Build started 25-5-2017 11:48:21.
      1>Project "C:\Users\Thijs\Documents\school\project\Air Handeling Unit\code\AirHandlingUnit\TheUnit\TheUnit\TheUnit.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt CO2.cpp ControllerBuilder.cpp CoolingElement.cpp Fan.cpp Flaps.cpp HeatingElement.cpp Humidity.cpp iActuator.cpp iSensor.cpp Temperature.cpp
-         Temperature.cpp
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\pwm.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\i2c.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\serial.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-         iSensor.cpp
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\pwm.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\i2c.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\serial.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-         iActuator.cpp
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\pwm.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\i2c.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\serial.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-         Humidity.cpp
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\pwm.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\i2c.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\serial.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-         HeatingElement.cpp
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\pwm.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\i2c.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\serial.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-         Flaps.cpp
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\pwm.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\i2c.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\serial.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-         Fan.cpp
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\pwm.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\i2c.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\serial.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-         CoolingElement.cpp
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\pwm.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\i2c.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\serial.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-         CO2.cpp
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\pwm.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\i2c.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\serial.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-         Generating Code...
-         Compiling...
-         ControllerBuilder.cpp
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\controllerbuilder.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\controllerbuilder.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\controllerbuilder.h(6): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\controller.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\controller.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\pwm.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\i2c.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\serial.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-         Generating Code...
-       Link:
-         C:\Program Files (x86)\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Thijs\Documents\school\project\Air Handeling Unit\code\AirHandlingUnit\TheUnit\Debug\TheUnit.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Thijs\Documents\school\project\Air Handeling Unit\code\AirHandlingUnit\TheUnit\Debug\TheUnit.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Thijs\Documents\school\project\Air Handeling Unit\code\AirHandlingUnit\TheUnit\Debug\TheUnit.lib" /MACHINE:X86 Debug\CO2.obj
+     1>Lib:
+         C:\Program Files (x86)\VC\bin\Lib.exe /OUT:"C:\Users\Thijs\Documents\school\project\Air Handeling Unit\code\AirHandlingUnit\TheUnit\Debug\TheUnit.lib" /NOLOGO Debug\CO2.obj
          Debug\ControllerBuilder.obj
          Debug\CoolingElement.obj
          Debug\Fan.obj
@@ -61,9 +11,9 @@
          Debug\iActuator.obj
          Debug\iSensor.obj
          Debug\Temperature.obj
-     1>LINK : fatal error LNK1561: entry point must be defined
-     1>Done Building Project "C:\Users\Thijs\Documents\school\project\Air Handeling Unit\code\AirHandlingUnit\TheUnit\TheUnit\TheUnit.vcxproj" (Build target(s)) -- FAILED.
+         TheUnit.vcxproj -> C:\Users\Thijs\Documents\school\project\Air Handeling Unit\code\AirHandlingUnit\TheUnit\Debug\TheUnit.lib
+     1>Done Building Project "C:\Users\Thijs\Documents\school\project\Air Handeling Unit\code\AirHandlingUnit\TheUnit\TheUnit\TheUnit.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:09.32
+Time Elapsed 00:00:03.51
