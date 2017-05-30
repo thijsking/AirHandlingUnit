@@ -2,6 +2,7 @@
 
 Manual::Manual()
 {
+	//Builder = new ControllerBuilder();
 	InitializeController();
 }
 
@@ -10,10 +11,10 @@ Manual::~Manual()
 
 void Manual::InitializeController()
 {
-	//Controller = ControllerBuilder::GetController();
+	//Controller = Builder->GetController();
 }
 
 void Manual::Update()
 {
-	//hier alles checken uit de config ile en veranderingen aansturen
+	cout << "updating" << endl;
 }

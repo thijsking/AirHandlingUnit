@@ -2,7 +2,6 @@
 #define AUTOMATIC_H
 
 #include "Control.h"
-//#include "Conroller.h"
 
 class Automatic : public Control
 {
@@ -12,7 +11,8 @@ public:
 	virtual void InitializeController();
 	virtual void Update();
 private:
-	//Controller* Controller
+	Controller* Controller;
+	ControllerBuilder* Builder;
 };
 
 #endif

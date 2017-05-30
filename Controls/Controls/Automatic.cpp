@@ -2,6 +2,7 @@
 
 Automatic::Automatic()
 {
+	//Builder = new ControllerBuilder();
 	InitializeController();
 }
 
@@ -10,10 +11,11 @@ Automatic::~Automatic()
 
 void Automatic::InitializeController()
 {
-	//Controller = ControlBuilder::GetController();
+
+	//Controller = Builder->GetController();
 }
 
 void Automatic::Update()
 {
-	//sensor waardes opvragen en pid regeling uitvoeren hier
+	cout << "updating" << endl;
 }

@@ -114,11 +114,13 @@
     <ClInclude Include="Automatic.h" />
     <ClInclude Include="Control.h" />
     <ClInclude Include="Manual.h" />
+    <ClInclude Include="SettingReader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Automatic.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Manual.cpp" />
+    <ClCompile Include="SettingReader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

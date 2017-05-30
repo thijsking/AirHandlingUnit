@@ -12,10 +12,10 @@ class ControllerBuilder
 public:
 	ControllerBuilder();
 	virtual ~ControllerBuilder();
-	virtual Controller GetController();
+	virtual Controller* GetController();
 	static void Dispose();
 private:
-	static Controller *Instance;
+	static Controller* Instance;
 };
 
 #endif

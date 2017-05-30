@@ -12,6 +12,7 @@ public:
 	virtual void Update();
 private:
 	Controller* Controller;
+	ControllerBuilder* Builder;
 };
 
 #endif

@@ -1,6 +1,9 @@
 #ifndef CONTROL_H
 #define CONTROL_H
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "../../TheUnit/TheUnit/Controller.h"
 #include "../../TheUnit/TheUnit/ControllerBuilder.h"
 

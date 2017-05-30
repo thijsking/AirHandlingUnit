@@ -1,12 +1,12 @@
 #include "Automatic.h"
 #include "Manual.h"
 #include "Control.h"
+#include "SettingReader.h"
 
 int main()
 {
-	//Control ManualControl = new Manual();
+	SettingReader::ReadFanSetings();
 
-
-
+	system("PAUSE");
 	return 0;
 }
