@@ -62,10 +62,10 @@ bool I2C::_writeByte(uint8_t data){
 }
 
 bool I2C::read(uint8_t* buffer, int length){
-	uint8_t tmpbuffer[length + 1] = {0}
+	uint8_t tmpbuffer[length + 1] = {0};
 	bool success = false;
 	while(!success){
-		if(read(filedescriptor, tmpbuffer, length) != length)
+		if(read(filedescriptor, tmpbuffer, length+1) != length+1)
 		{
 			usleep(100);
 		}

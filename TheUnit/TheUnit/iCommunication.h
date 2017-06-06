@@ -4,8 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-using namespace std;
-
 class iCommunication
 {
 public:
@@ -15,7 +13,5 @@ public:
 	virtual int Read() = 0;
 
 };
-
-
 
 #endif

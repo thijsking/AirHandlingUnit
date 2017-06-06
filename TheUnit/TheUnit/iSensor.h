@@ -4,8 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-using namespace std;
-
 class iCommunication;
 
 class iSensor
@@ -18,7 +16,5 @@ protected:
 	iCommunication *Communication;
 
 };
-
-
 
 #endif
