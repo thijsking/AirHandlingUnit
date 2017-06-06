@@ -1,8 +1,8 @@
 #include "Manual.h"
+#include "SettingReader.h"
 
 Manual::Manual()
 {
-	//Builder = new ControllerBuilder();
 	InitializeController();
 }
 
@@ -11,10 +11,44 @@ Manual::~Manual()
 
 void Manual::InitializeController()
 {
-	//Controller = Builder->GetController();
+	/*ControllerBuilder* builder = new ControllerBuilder();
+	mController = builder->GetController();*/
 }
 
 void Manual::Update()
 {
-	cout << "updating" << endl;
+	map<string, int> componentsValue;
+	map<string, bool> changed = SettingReader::CheckChangedSettings();
+
+	if (changed["fan"])
+	{
+		componentsValue = SettingReader::ReadSetings("fan");
+		for (map<string, int>::const_iterator i = componentsValue.begin(); i != componentsValue.end(); i++)
+			//mController->SetFanSpeed(i->first, i->second);
+			cout << "update " << i->first << "with value " << i->second << endl;
+	}
+	if (changed["heating"])
+	{
+		componentsValue = SettingReader::ReadSetings("heating");
+		for (map<string, int>::const_iterator i = componentsValue.begin(); i != componentsValue.end(); i++)
+			//mController->SetHeatingTemperature(i->first, i->second);
+			cout << "update " << i->first << "with value " << i->second << endl;
+	}
+	if (changed["cooling"])
+	{
+		componentsValue = SettingReader::ReadSetings("cooling");
+		for (map<string, int>::const_iterator i = componentsValue.begin(); i != componentsValue.end(); i++)
+			//mController->SetCoolingTemperature(i->first, i->second);
+			cout << "update " << i->first << "with value " << i->second << endl;
+	}
+	if (changed["vents"])
+	{
+		componentsValue = SettingReader::ReadSetings("vents");
+		for (map<string, int>::const_iterator i = componentsValue.begin(); i != componentsValue.end(); i++)
+			//mController->SetVentAngle(i->first, i->second);
+			cout << "update " << i->first << "with value " << i->second << endl;
+	}
+
+	//SettingReader::WriteSensorValues(mController->GetSensorValue());
 }
+

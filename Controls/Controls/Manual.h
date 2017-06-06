@@ -11,8 +11,7 @@ public:
 	virtual void InitializeController();
 	virtual void Update();
 private:
-	Controller* Controller;
-	ControllerBuilder* Builder;
+	Controller* mController;
 };
 
 #endif

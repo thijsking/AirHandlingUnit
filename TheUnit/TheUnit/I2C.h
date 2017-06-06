@@ -1,7 +1,7 @@
 #ifndef I2C_H
 #define I2C_H
 
-#include "iCommunication.h";
+#include "iCommunication.h"
 
 class I2C : public iCommunication
 {

@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <map>
 
 #include "../../TheUnit/TheUnit/Controller.h"
 #include "../../TheUnit/TheUnit/ControllerBuilder.h"

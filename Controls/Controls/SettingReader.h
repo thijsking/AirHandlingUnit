@@ -5,13 +5,19 @@
 #include <stdlib.h>
 #include <string>
 #include <map>
+#include "Automatic.h"
+#include "Manual.h"
 
 using namespace std;
 
 class SettingReader
 {
 public:
-	static void ReadFanSetings();
+	static map<string,int> ReadSetings(string);
+	static string ReadControlMode();
+	static void CheckControlMode(Control*);
+	static map<string, bool> CheckChangedSettings();
+	static void WriteSensorValues(map < string, int>);
 };
 
 

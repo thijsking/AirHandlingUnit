@@ -2,7 +2,6 @@
 
 Automatic::Automatic()
 {
-	//Builder = new ControllerBuilder();
 	InitializeController();
 }
 
@@ -12,7 +11,7 @@ Automatic::~Automatic()
 void Automatic::InitializeController()
 {
 
-	//Controller = Builder->GetController();
+	//mController = ControlBuilder::GetController();
 }
 
 void Automatic::Update()
