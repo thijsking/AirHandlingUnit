@@ -5,8 +5,12 @@
 
 class PWM : public iCommunication
 {
-	PWM();
+public:
+	PWM(int pin, int initialValue, int pwmRange);
+	void Write(int value);
 	virtual ~PWM();
+private:
+	int pin;
 };
 
 
