@@ -1,13 +1,5 @@
-﻿  Temperature.cpp
-  iSensor.cpp
-  iActuator.cpp
-  Humidity.cpp
-  HeatingElement.cpp
-  Flaps.cpp
-  Fan.cpp
-  CoolingElement.cpp
-  ControllerBuilder.cpp
-  Controller.cpp
-  CO2.cpp
+﻿  Controller.cpp
   Generating Code...
+  Skipping... (no relevant changes detected)
+  ControllerBuilder.cpp
   TheUnit.vcxproj -> C:\Users\Thijs\Documents\school\project\Air Handeling Unit\code\AirHandlingUnit\TheUnit\Debug\TheUnit.lib

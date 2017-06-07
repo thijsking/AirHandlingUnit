@@ -1,13 +1,4 @@
 ﻿  SettingReader.cpp
-  main.cpp
-c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\controller.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\controller.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\pwm.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\i2c.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\serial.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\controllerbuilder.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\controllerbuilder.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\theunit\theunit\controllerbuilder.h(6): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  Generating Code...
+c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\controls\controls\settingreader.cpp(46): warning C4715: 'SettingReader::ReadControlMode': not all control paths return a value
   Controls.vcxproj -> C:\Users\Thijs\Documents\school\project\Air Handeling Unit\code\AirHandlingUnit\Controls\Debug\Controls.exe
   Controls.vcxproj -> C:\Users\Thijs\Documents\school\project\Air Handeling Unit\code\AirHandlingUnit\Controls\Debug\Controls.pdb (Partial PDB)

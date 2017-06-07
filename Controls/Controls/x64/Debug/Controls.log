@@ -1,7 +1,10 @@
-﻿  Manual.cpp
-  Generating Code...
-  Skipping... (no relevant changes detected)
+﻿  SettingReader.cpp
+c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\controls\controls\settingreader.cpp(19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Manual.cpp
   main.cpp
-  SettingReader.cpp
-  Controls.vcxproj -> C:\Users\Thijs\Documents\school\project\Air Handeling Unit\code\AirHandlingUnit\Controls\x64\Debug\Controls.exe
-  Controls.vcxproj -> C:\Users\Thijs\Documents\school\project\Air Handeling Unit\code\AirHandlingUnit\Controls\x64\Debug\Controls.pdb (Partial PDB)
+  Automatic.cpp
+  Generating Code...
+c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\controls\controls\settingreader.cpp(46): warning C4715: 'SettingReader::ReadControlMode': not all control paths return a value
+Manual.obj : error LNK2019: unresolved external symbol "public: static class Controller * __cdecl ControllerBuilder::GetController(void)" (?GetController@ControllerBuilder@@SAPEAVController@@XZ) referenced in function "public: virtual void __cdecl Manual::InitializeController(void)" (?InitializeController@Manual@@UEAAXXZ)
+../../TheUnit/Debug/TheUnit.lib : warning LNK4272: library machine type 'X86' conflicts with target machine type 'x64'
+C:\Users\Thijs\Documents\school\project\Air Handeling Unit\code\AirHandlingUnit\Controls\x64\Debug\Controls.exe : fatal error LNK1120: 1 unresolved externals
