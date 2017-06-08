@@ -1,18 +1,17 @@
-#include "Humidity.h"
+ #include "Humidity.h"
 
 Humidity::Humidity(iCommunication* comm, uint8_t address):
-	address(address){
-	this->Communication = comm;
+	Communication(comm), Address(address)
+{
 }
 
-void Humidity::Initialize(){} //Empty on purpose
-
 //TODO: should return double
-int Humidity::GetValue(){
+double Humidity::GetValue()
+{
 //TODO: use results of bool functions for error checking
 
 	//Measure RH, No-hold master mode
-	Communication->Write(0xF5, address);
+	Communication->Write(0xF5, Address);
 
 	//Get result
 	uint8_t buffer[2] = {0};

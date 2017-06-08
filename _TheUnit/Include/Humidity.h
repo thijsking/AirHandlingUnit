@@ -6,13 +6,12 @@
 class Humidity : public iSensor
 {
 public:
-	Humidity(iCommunication* comm, uint8_t address);
+	Humidity(iCommunication*, uint8_t);
 	virtual  ~Humidity();
-	void Initialize();
-//TODO should be double
-	int GetValue();
+	virtual double GetValue();
 private:
-	uint8_t address;
+	uint8_t Address;
+	iCommunication* Communication;
 };
 
 

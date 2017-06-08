@@ -1,16 +1,15 @@
 #include "Temperature.h"
 
-Temperature::Temperature(std::string com) : iSensor()
+Temperature::Temperature(iCommunication* communication, uint8_t address) : 
+	Communication(communication), Address(address)
 {
-	Initialize(com);
 }
 
 Temperature::~Temperature()
 {
 }
 
-void Temperature::Initialize(std::string communication)
+double Temperature::GetValue()
 {
-	//initialisatie voor de fan stoppen
-	iSensor::Initialize(communication);
+
 }

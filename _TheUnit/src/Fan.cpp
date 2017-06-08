@@ -1,16 +1,15 @@
 #include "Fan.h"
 
-Fan::Fan(string com) : iActuator()
+Fan::Fan(iCommunication* communication, uint8_t address) :
+	Communication(communication), Address(address)
 {
-	Initialize(com);
 }
 
 Fan::~Fan()
 {
 }
 
-void Fan::Initialize(string communication)
+void Fan::SetValue(uint8_t value)
 {
-	//initialisatie voor de fan stoppen
-	iActuator::Initialize(communication);
+
 }
