@@ -8,8 +8,6 @@
 #include "I2C.h"
 #include "Serial.h"
 
-using namespace std;
-
 class iCommunication;
 
 class iSensor
@@ -23,7 +21,5 @@ protected:
 	iCommunication *Communication;
 
 };
-
-
 
 #endif
