@@ -1,16 +1,15 @@
 #include "CO2.h"
 
-CO2::CO2(string com) : iSensor()
+CO2::CO2(iCommunication* communication, uint8_t address) :
+	Communication(communication), Address(address)
 {
-	Initialize(com);
 }
 
 CO2::~CO2()
 {
 }
 
-void CO2::Initialize(string communication)
+double CO2::GetValue()
 {
-	//initialisatie voor de fan stoppen
-	iSensor::Initialize(communication);
+
 }

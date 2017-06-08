@@ -90,8 +90,8 @@
     <ClCompile Include="Flaps.cpp" />
     <ClCompile Include="HeatingElement.cpp" />
     <ClCompile Include="Humidity.cpp" />
+    <ClCompile Include="I2C.cpp" />
     <ClCompile Include="iActuator.cpp" />
-    <ClCompile Include="iSensor.cpp" />
     <ClCompile Include="Temperature.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
