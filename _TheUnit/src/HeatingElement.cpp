@@ -8,7 +8,7 @@ HeatingElement::~HeatingElement()
 {
 }
 
-void HeatingElement::SetValue(uint8_t)
+void HeatingElement::SetValue(uint8_t value)
 {
 	if (value < 0)
 		value = 0;

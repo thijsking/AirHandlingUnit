@@ -15,4 +15,6 @@ public:
 	virtual double GetValue() = 0;
 };
 
+inline iSensor::~iSensor(){}
+
 #endif 

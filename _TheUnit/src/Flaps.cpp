@@ -1,6 +1,7 @@
 #include "Flaps.h"
 
 Flaps::Flaps(iCommunication* communication, uint8_t address) : iActuator(communication, address)
+{
 }
 
 Flaps::~Flaps()

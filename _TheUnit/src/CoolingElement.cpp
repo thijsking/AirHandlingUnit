@@ -8,7 +8,7 @@ CoolingElement::~CoolingElement()
 {
 }
 
-void CoolingElement::SetValue(uint8_t)
+void CoolingElement::SetValue(uint8_t value)
 {
 	if (value < 0)
 		value = 0;

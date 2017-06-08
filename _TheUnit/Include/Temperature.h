@@ -7,7 +7,7 @@ class Temperature : public iSensor
 {
 public:
 	Temperature(iCommunication*, uint8_t);
-	virtual  ~Temperature();
+	virtual ~Temperature();
 	virtual double GetValue();
 private:
 	iCommunication* Communication;
