@@ -11,7 +11,6 @@ public:
 	virtual void Initialize() = 0;
 	virtual void Write(int) = 0;
 	virtual int Read() = 0;
-
 };
 
 #endif
