@@ -15,7 +15,7 @@ class iSensor
 public:
 	iSensor();
 	virtual ~iSensor();
-	virtual void Initialize(string);
+	virtual void Initialize(std::string);
 	virtual int GetValue();
 protected:
 	iCommunication *Communication;

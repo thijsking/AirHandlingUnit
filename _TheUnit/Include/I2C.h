@@ -13,7 +13,10 @@ public:
 	I2C();
 	virtual ~I2C();
 	bool writeByte(uint8_t address, uint8_t data); //return true on succes
-	bool read(uint8_t* buffer, int length);
+	bool readBuffer(uint8_t* buffer, int length);
+	void Initialize();
+	void Write(int);
+	int Read();
 private:
 	bool _setSlave(uint8_t address); //return true on succes
 	bool _write(uint8_t address, uint8_t data); //return true on succes

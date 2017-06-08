@@ -61,7 +61,7 @@ bool I2C::_writeByte(uint8_t data){
 	return true;
 }
 
-bool I2C::read(uint8_t* buffer, int length){
+bool I2C::readBuffer(uint8_t* buffer, int length){
 	uint8_t tmpbuffer[length + 1] = {0};
 	bool success = false;
 	while(!success){
@@ -75,4 +75,11 @@ bool I2C::read(uint8_t* buffer, int length){
 		}
 	}
 	memcpy(buffer, tmpbuffer, length);
+	return true;
 }
+
+//TODO: empty on purpose for now
+void I2C::Initialize(){}
+void I2C::Write(int i){}
+int I2C::Read(){}
+

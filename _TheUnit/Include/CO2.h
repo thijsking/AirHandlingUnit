@@ -6,9 +6,9 @@
 class CO2 : public iSensor
 {
 public:
-	CO2(string);
+	CO2(std::string);
 	virtual  ~CO2();
-	virtual void Initialize(string);
+	virtual void Initialize(std::string);
 };
 
 

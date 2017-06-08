@@ -6,9 +6,9 @@
 class Temperature : public iSensor
 {
 public:
-	Temperature(string);
+	Temperature(std::string);
 	virtual  ~Temperature();
-	virtual void Initialize(string);
+	virtual void Initialize(std::string);
 };
 
 
