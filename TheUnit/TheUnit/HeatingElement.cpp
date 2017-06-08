@@ -1,16 +1,15 @@
 #include "HeatingElement.h"
 
-HeatingElement::HeatingElement(string com) : iActuator()
+HeatingElement::HeatingElement(iCommunication* communication, uint8_t address) :
+	Communication(communication), Address(address)
 {
-	Initialize(com);
 }
 
 HeatingElement::~HeatingElement()
 {
 }
 
-void HeatingElement::Initialize(string communication)
+void HeatingElement::SetValue(uint8_t)
 {
-	//initialisatie voor de fan stoppen
-	iActuator::Initialize(communication);
+
 }

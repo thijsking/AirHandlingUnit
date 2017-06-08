@@ -6,9 +6,12 @@
 class CO2 : public iSensor
 {
 public:
-	CO2(std::string);
+	CO2(iCommunication*, uint8_t);
 	virtual  ~CO2();
-	virtual void Initialize(std::string);
+	virtual double GetValue();
+private:
+	iCommunication* Communication;
+	uint8_t Address;
 };
 
 

@@ -1,16 +1,21 @@
 #include "Flaps.h"
 
-Flaps::Flaps(string com) : iActuator()
+Flaps::Flaps(iCommunication* communication, uint8_t address) :
+	Communication(communication), Address(address)
 {
-	Initialize(com);
 }
 
 Flaps::~Flaps()
 {
 }
 
-void Flaps::Initialize(string communication)
+void Flaps::SetValue(uint8_t value)
 {
-	//initialisatie voor de fan stoppen
-	iActuator::Initialize(communication);
+	if (value < 50)
+		value = 50;
+	else if (value > 170)
+		value = 170;
+
+	if (!Communication->Write(value, Address))
+		std::cout << "ERROR: writing to vents went wrong" << std::endl;
 }

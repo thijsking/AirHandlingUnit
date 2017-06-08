@@ -6,9 +6,12 @@
 class CoolingElement : public iActuator
 {
 public:
-	CoolingElement(string);
+	CoolingElement(iCommunication*, uint8_t);
 	virtual	 ~CoolingElement();
-	virtual void Initialize(string);
+	virtual void SetValue(uint8_t);
+private:
+	iCommunication* Communication;
+	uint8_t Address;
 };
 
 

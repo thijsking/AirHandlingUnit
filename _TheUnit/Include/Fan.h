@@ -6,9 +6,12 @@
 class Fan : public iActuator
 {
 public:
-	Fan(string);
+	Fan(iCommunication*, uint8_t);
 	virtual	 ~Fan();
-	virtual void Initialize(string);
+	virtual void SetValue(uint8_t);
+private:
+	iCommunication* Communication;
+	uint8_t Address;
 };
 
 

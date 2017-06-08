@@ -13,6 +13,7 @@ public:
 	virtual void Update();
 private:
 	void LogSensorValues();
+	void LogSensorValues(string);
 	Controller* mController;
 };
 

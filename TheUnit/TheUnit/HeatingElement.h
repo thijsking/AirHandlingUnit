@@ -6,9 +6,12 @@
 class HeatingElement : public iActuator
 {
 public:
-	HeatingElement(string);
+	HeatingElement(iCommunication*, uint8_t);
 	virtual	 ~HeatingElement();
-	virtual void Initialize(string);
+	virtual void SetValue(uint8_t);
+private:
+	iCommunication* Communication;
+	uint8_t Address;
 };
 
 

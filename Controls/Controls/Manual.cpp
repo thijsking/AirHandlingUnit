@@ -16,40 +16,37 @@ void Manual::InitializeController()
 
 void Manual::Update()
 {
-	map<string, int> componentsValue;
 	map<string, bool> changed = SettingReader::CheckChangedSettings();
 
 	if (changed["fan"])
 	{
-		componentsValue = SettingReader::ReadSetings("fan");
-		for (map<string, int>::const_iterator i = componentsValue.begin(); i != componentsValue.end(); i++)
-			//mController->SetFanSpeed(i->first, i->second);
-			cout << "update " << i->first << "with value " << i->second << endl;
+		LogSensorValues("fan");
 	}
 	if (changed["heating"])
 	{
-		componentsValue = SettingReader::ReadSetings("heating");
-		for (map<string, int>::const_iterator i = componentsValue.begin(); i != componentsValue.end(); i++)
-			//mController->SetHeatingTemperature(i->first, i->second);
-			cout << "update " << i->first << "with value " << i->second << endl;
+		LogSensorValues("heating");
 	}
 	if (changed["cooling"])
 	{
-		componentsValue = SettingReader::ReadSetings("cooling");
-		for (map<string, int>::const_iterator i = componentsValue.begin(); i != componentsValue.end(); i++)
-			//mController->SetCoolingTemperature(i->first, i->second);
-			cout << "update " << i->first << "with value " << i->second << endl;
+		LogSensorValues("cooling");
 	}
 	if (changed["vents"])
 	{
-		componentsValue = SettingReader::ReadSetings("vents");
-		for (map<string, int>::const_iterator i = componentsValue.begin(); i != componentsValue.end(); i++)
-			//mController->SetVentAngle(i->first, i->second);
-			cout << "update " << i->first << "with value " << i->second << endl;
+		LogSensorValues("vents");
 	}
 
 	//SettingReader::WriteSensorValues(mController->GetSensorValue());
 	LogSensorValues();
+}
+
+void Manual::LogSensorValues(string actuator)
+{
+	map<string, int> componentsValue;
+
+	componentsValue = SettingReader::ReadSetings(actuator);
+	for (map<string, int>::const_iterator i = componentsValue.begin(); i != componentsValue.end(); i++)
+		//mController->SetActuatorValue(i->first, i->second);
+		cout << "update " << i->first << "with value " << i->second << endl;
 }
 
 void Manual::LogSensorValues()

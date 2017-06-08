@@ -6,9 +6,12 @@
 class Temperature : public iSensor
 {
 public:
-	Temperature(string);
+	Temperature(iCommunication*, uint8_t);
 	virtual  ~Temperature();
-	virtual void Initialize(string);
+	virtual double GetValue();
+private:
+	iCommunication* Communication;
+	uint8_t Address;
 };
 
 

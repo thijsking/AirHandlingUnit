@@ -4,24 +4,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
-#include "PWM.h"
-#include "I2C.h"
-#include "Serial.h"
-
-
-using namespace std;
-
+#include "iCommunication.h"
 class iCommunication;
 
 class iActuator
 {
 public:
-	iActuator();
-	virtual ~iActuator();
-	virtual void Initialize(string);
-	virtual void SetValue(int);
-protected:
-	iCommunication *Communication;
+	virtual ~iActuator() = 0;
+	virtual void SetValue(uint8_t) = 0;
 };
 
 
