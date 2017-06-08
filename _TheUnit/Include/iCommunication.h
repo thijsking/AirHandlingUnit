@@ -14,4 +14,6 @@ public:
 	virtual bool Read(uint8_t* data, uint8_t length) = 0;
 };
 
+inline iCommunication::~iCommunication() {}
+
 #endif
