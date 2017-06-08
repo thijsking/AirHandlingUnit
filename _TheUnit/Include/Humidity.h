@@ -10,8 +10,8 @@ public:
 	virtual  ~Humidity();
 	virtual double GetValue();
 private:
-	uint8_t Address;
 	iCommunication* Communication;
+	uint8_t Address;
 };
 
 
