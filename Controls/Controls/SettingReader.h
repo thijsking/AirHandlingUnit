@@ -8,8 +8,6 @@
 #include "Automatic.h"
 #include "Manual.h"
 
-using namespace std;
-
 class SettingReader
 {
 public:
@@ -18,6 +16,7 @@ public:
 	static void CheckControlMode(Control*);
 	static map<string, bool> CheckChangedSettings();
 	static void WriteSensorValues(map < string, int>);
+	static void LogSensorValues(map <string, int>);
 };
 
 

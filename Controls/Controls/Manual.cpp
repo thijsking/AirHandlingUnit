@@ -49,5 +49,19 @@ void Manual::Update()
 	}
 
 	//SettingReader::WriteSensorValues(mController->GetSensorValue());
+	LogSensorValues();
+}
+
+void Manual::LogSensorValues()
+{
+	static std::clock_t startTime = std::clock();
+	
+	double timePassed = (std::clock() - startTime) / (double)CLOCKS_PER_SEC;
+	if (timePassed > 10.0)
+	{
+		//SettingReader::LogSensorValues(mController->GetSensorValue);
+		startTime = std::clock();
+		cout << "logging because duration is " << timePassed << endl;
+	}
 }
 
