@@ -11,7 +11,7 @@ public:
 	virtual double GetValue();
 private:
 	iCommunication* Communication;
-	uint8_t Address
+	uint8_t Address;
 };
 
 

@@ -11,6 +11,38 @@ Controller::~Controller()
 
 void Controller::Initialze()
 {
+	iCommunication* i2c = new I2C();
+	iCommunication* pwm = new PWM();
+	iCommunication* serial = new Serial();
+	
+	ActuatorMap["fan1"] = new Fan(pwm, 123);
+	ActuatorMap["fan2"] = new Fan(pwm, 123);
+	ActuatorMap["heating1"] = new HeatingElement(pwm, 123);
+	ActuatorMap["heating2"] = new HeatingElement(pwm, 123);
+	ActuatorMap["cooling"] = new CoolingElement(pwm, 123);
+	ActuatorMap["vent1"] = new Flaps(pwm, 123);
+	ActuatorMap["vent2"] = new Flaps(pwm, 123);
+	ActuatorMap["vent3"] = new Flaps(pwm, 123);
+	ActuatorMap["vent4"] = new Flaps(pwm, 123);
+
+	SensorMap["CO2-1"] = new CO2(serial, 123);
+	SensorMap["CO2-2"] = new CO2(serial, 123);
+	SensorMap["tempeature1"] = new Temperature(i2c, 123);
+	SensorMap["tempeature2"] = new Temperature(i2c, 123);
+	SensorMap["tempeature3"] = new Temperature(i2c, 123);
+	SensorMap["tempeature4"] = new Temperature(i2c, 123);
+	SensorMap["tempeature5"] = new Temperature(i2c, 123);
+	SensorMap["tempeature6"] = new Temperature(i2c, 123);
+	SensorMap["tempeature7"] = new Temperature(i2c, 123);
+	SensorMap["tempeature8"] = new Temperature(i2c, 123);
+	SensorMap["humidity1"] = new Humidity(i2c, 123);
+	SensorMap["humidity2"] = new Humidity(i2c, 123);
+	SensorMap["humidity3"] = new Humidity(i2c, 123);
+	SensorMap["humidity4"] = new Humidity(i2c, 123);
+	SensorMap["humidity5"] = new Humidity(i2c, 123);
+	SensorMap["humidity6"] = new Humidity(i2c, 123);
+	SensorMap["humidity7"] = new Humidity(i2c, 123);
+	SensorMap["humidity8"] = new Humidity(i2c, 123);
 
 }
 

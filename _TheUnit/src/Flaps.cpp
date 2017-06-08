@@ -17,5 +17,5 @@ void Flaps::SetValue(uint8_t value)
 		value = 170;
 
 	if (!Communication->Write(value, Address))
-		std::cout << "ERROR: writing to flaps went wrong" << std::endl;
+		std::cout << "ERROR: writing to vents went wrong" << std::endl;
 }
