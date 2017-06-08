@@ -12,11 +12,9 @@ class I2C : public iCommunication
 public:
 	I2C();
 	virtual ~I2C();
-	bool writeByte(uint8_t address, uint8_t data); //return true on succes
-	bool readBuffer(uint8_t* buffer, int length);
-	void Initialize();
-	void Write(int);
-	int Read();
+	bool Write(uint8_t data,uint8_t address); //return true on succes
+	bool Read(uint8_t* buffer, uint8_t length);
+	bool Initialize();
 private:
 	bool _setSlave(uint8_t address); //return true on succes
 	bool _write(uint8_t address, uint8_t data); //return true on succes

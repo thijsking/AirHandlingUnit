@@ -8,9 +8,9 @@ class PWM : public iCommunication
 public:
 	PWM();
 	virtual ~PWM();
-	virtual void Initialize();
-	virtual void Write(int);
-	virtual int Read();
+	virtual bool Initialize();
+	virtual bool Write(uint8_t data, uint8_t address);
+	virtual bool Read(uint8_t* buffer, uint8_t length);
 };
 
 

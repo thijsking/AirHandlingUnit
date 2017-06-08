@@ -19,7 +19,7 @@ I2C::~I2C(){
 	// reset multiplexer?
 }
 
-bool I2C::writeByte(uint8_t address, uint8_t data){
+bool I2C::Write(uint8_t data, uint8_t address){
 	if(address != currentTarget){
 		if(!_setSlave(address)){
 			std::cerr << "Did not try to write " << data << " to " << address << std::endl;
@@ -61,7 +61,7 @@ bool I2C::_writeByte(uint8_t data){
 	return true;
 }
 
-bool I2C::readBuffer(uint8_t* buffer, int length){
+bool I2C::Read(uint8_t* buffer, uint8_t length){
 	uint8_t tmpbuffer[length + 1] = {0};
 	bool success = false;
 	while(!success){
@@ -79,7 +79,5 @@ bool I2C::readBuffer(uint8_t* buffer, int length){
 }
 
 //TODO: empty on purpose for now
-void I2C::Initialize(){}
-void I2C::Write(int i){}
-int I2C::Read(){}
+bool I2C::Initialize(){}
 
