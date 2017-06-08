@@ -9,9 +9,6 @@ public:
 	Flaps(iCommunication*, uint8_t);
 	virtual	 ~Flaps();
 	virtual void SetValue(uint8_t);
-private:
-	iCommunication* Communication;
-	uint8_t Address;
 };
 
 

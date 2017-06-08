@@ -10,8 +10,12 @@ class iCommunication;
 class iActuator
 {
 public:
-	virtual ~iActuator() = 0;
-	virtual void SetValue(uint8_t) = 0;
+	iActuator(iCommunication*, uint8_t);
+	virtual ~iActuator();
+	virtual void SetValue(uint8_t);
+protected:
+	iCommunication* Communication;
+	uint8_t Address;
 };
 
 

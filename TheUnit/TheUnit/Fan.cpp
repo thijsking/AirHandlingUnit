@@ -1,7 +1,6 @@
 #include "Fan.h"
 
-Fan::Fan(iCommunication* communication, uint8_t address) :
-	Communication(communication), Address(address)
+Fan::Fan(iCommunication* communication, uint8_t address) : iActuator(communication, address)
 {
 }
 
@@ -11,5 +10,10 @@ Fan::~Fan()
 
 void Fan::SetValue(uint8_t value)
 {
+	if (value < 0)
+		value = 0;
+	else if (value > 255)
+		value = 255;
 
+	iActuator::SetValue(value);
 }

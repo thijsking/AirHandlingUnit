@@ -5,6 +5,10 @@ Humidity::Humidity(iCommunication* comm, uint8_t address):
 {
 }
 
+Humidity::~Humidity()
+{
+}
+
 //TODO: should return double
 double Humidity::GetValue()
 {

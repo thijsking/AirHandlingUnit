@@ -9,9 +9,6 @@ public:
 	CoolingElement(iCommunication*, uint8_t);
 	virtual	 ~CoolingElement();
 	virtual void SetValue(uint8_t);
-private:
-	iCommunication* Communication;
-	uint8_t Address;
 };
 
 

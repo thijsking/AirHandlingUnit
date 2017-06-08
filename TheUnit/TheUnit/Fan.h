@@ -9,9 +9,6 @@ public:
 	Fan(iCommunication*, uint8_t);
 	virtual	 ~Fan();
 	virtual void SetValue(uint8_t);
-private:
-	iCommunication* Communication;
-	uint8_t Address;
 };
 
 
