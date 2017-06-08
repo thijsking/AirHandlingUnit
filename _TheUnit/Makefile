@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -g -Wall
+CFLAGS = -g -Wall -std=c++11
 SRCS = $(wildcard src/*.cpp)
 OBJS = $(SRCS:.cpp=.o)
 LIBS = -I Include
