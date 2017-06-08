@@ -1,7 +1,7 @@
 #ifndef SERIAL_H
 #define SERIAL_H
 
-#include "iCommunication.h";
+#include "iCommunication.h"
 
 class Serial : public iCommunication
 {

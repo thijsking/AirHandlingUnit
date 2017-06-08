@@ -10,12 +10,12 @@ ControllerBuilder::~ControllerBuilder()
 	Dispose();
 }
 
-Controller ControllerBuilder::GetController()
+Controller* ControllerBuilder::GetController()
 {
 	if (Instance == NULL)
 		Instance = new Controller();
 
-	return *Instance;
+	return Instance;
 }
 
 void ControllerBuilder::Dispose()

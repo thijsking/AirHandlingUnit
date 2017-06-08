@@ -1,7 +1,7 @@
 #ifndef PWM_H
 #define PWM_H
 
-#include "iCommunication.h";
+#include "iCommunication.h"
 
 class PWM : public iCommunication
 {
