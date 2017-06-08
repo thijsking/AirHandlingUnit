@@ -9,7 +9,7 @@ iActuator::~iActuator()
 {
 }
 
-void iActuator::Initialize(string communication)
+void iActuator::Initialize(std::string communication)
 {
 	if (communication == "Serial")
 		Communication = new Serial();
@@ -18,5 +18,5 @@ void iActuator::Initialize(string communication)
 	else if (communication == "PWM")
 		Communication = new PWM();
 	else
-		cout << "ERROR Wrong communication method used" << endl;
+		std::cout << "ERROR Wrong communication method used" << std::endl;
 }

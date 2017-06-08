@@ -11,7 +11,7 @@ Manual::~Manual()
 
 void Manual::InitializeController()
 {
-	// mController = ControllerBuilder::GetController();
+	mController = ControllerBuilder::GetController();
 }
 
 void Manual::Update()

@@ -6,9 +6,12 @@
 class Humidity : public iSensor
 {
 public:
-	Humidity(string);
+	Humidity();
 	virtual  ~Humidity();
-	virtual void Initialize(string);
+	void Initialize();
+	double GetValue();
+private:
+	uint8_t address;
 };
 
 
