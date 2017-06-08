@@ -112,8 +112,25 @@ void SettingReader::WriteSensorValues(map<string, int> sensorValues)
 	{
 		for (map<string, int>::const_iterator i = sensorValues.begin(); i != sensorValues.end(); i++)
 		{
-			file << i->first << "," << i->second;
+			file << i->first << "," << i->second << endl;
 		}
 	}
 	file.close();
+}
+
+void SettingReader::LogSensorValues(map<string, int> sensorValues)
+{
+	fstream file;
+	string path = PATH;
+	string date = __TIMESTAMP__;
+	path += "log/" + date;
+
+	file.open(path.c_str(), fstream::out);
+	if (file.is_open())
+	{
+		for (map<string, int>::const_iterator i = sensorValues.begin(); i != sensorValues.end(); i++)
+		{
+			file << i->first << "," << i->second << endl;
+		}
+	}
 }
