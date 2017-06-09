@@ -1,5 +1,5 @@
 #include <iostream>
-//#include <Windows.h>
+#include <Windows.h>
 #include "Automatic.h"
 #include "Manual.h"
 #include "Control.h"
@@ -8,6 +8,8 @@
 int main()
 {
 	Control* ControlMode = NULL;
+	SettingReader::CreateAFile("mode");
+
 	while (ControlMode == NULL)
 	{
 		string mode = SettingReader::ReadControlMode();
@@ -15,7 +17,7 @@ int main()
 			ControlMode = new Manual();
 		else if (mode == "automatic")
 			ControlMode = new Automatic();
-//		Sleep(5000);
+		Sleep(5000);
 	}
 	cout << "mode reconigized" << endl;
 

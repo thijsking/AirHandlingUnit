@@ -13,14 +13,16 @@ void Manual::Initialize()
 {
 	// mController = ControllerBuilder::GetController();
 	
-	string fileNames[] = { "cooling","fan","mode","vents","settingChanged","heating" };
-	for (int i = 0; i < sizeof(fileNames); i++)
-		SettingReader::CreateFile(fileNames[i]);
+	std::vector<std::string> fileNames = { "cooling","fan","vents","settingChanged","heating" };
+	for (int i = 0; i < fileNames.size(); i++)
+	{
+		SettingReader::CreateAFile(fileNames[i]);
+	}
 }
 
 void Manual::Update()
 {
-	map<string, bool> changed = SettingReader::CheckChangedSettings();
+	std::map<std::string, bool> changed = SettingReader::CheckChangedSettings();
 
 	if (changed["fan"])
 	{
@@ -43,14 +45,14 @@ void Manual::Update()
 	LogSensorValues();
 }
 
-void Manual::LogSensorValues(string actuator)
+void Manual::LogSensorValues(std::string actuator)
 {
-	map<string, int> componentsValue;
+	std::map<std::string, int> componentsValue;
 
 	componentsValue = SettingReader::ReadSetings(actuator);
-	for (map<string, int>::const_iterator i = componentsValue.begin(); i != componentsValue.end(); i++)
+	for (std::map<std::string, int>::const_iterator i = componentsValue.begin(); i != componentsValue.end(); i++)
 		//mController->SetActuatorValue(i->first, i->second);
-		cout << "update " << i->first << "with value " << i->second << endl;
+		std::cout << "update " << i->first << "with value " << i->second << std::endl;
 }
 
 void Manual::LogSensorValues()
@@ -62,7 +64,7 @@ void Manual::LogSensorValues()
 	{
 		//SettingReader::LogSensorValues(mController->GetSensorValue);
 		startTime = std::clock();
-		cout << "logging because duration is " << timePassed << endl;
+		std::cout << "logging because duration is " << timePassed << std::endl;
 	}
 }
 

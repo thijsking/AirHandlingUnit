@@ -3,6 +3,7 @@
 
 #include "Control.h"
 #include <ctime>
+#include <vector>
 
 class Manual : public Control
 {
@@ -13,7 +14,7 @@ public:
 	virtual void Update();
 private:
 	void LogSensorValues();
-	void LogSensorValues(string);
+	void LogSensorValues(std::string);
 	Controller* mController;
 };
 

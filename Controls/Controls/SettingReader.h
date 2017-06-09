@@ -11,13 +11,13 @@
 class SettingReader
 {
 public:
-	static map<string,int> ReadSetings(string);
-	static string ReadControlMode();
+	static std::map<std::string,int> ReadSetings(std::string);
+	static std::string ReadControlMode();
 	static void CheckControlMode(Control*);
-	static map<string, bool> CheckChangedSettings();
-	static void WriteSensorValues(map < string, int>);
-	static void LogSensorValues(map <string, int>);
-	static void CreateFile(string);
+	static std::map<std::string, bool> CheckChangedSettings();
+	static void WriteSensorValues(std::map < std::string, int>);
+	static void LogSensorValues(std::map <std::string, int>);
+	static void CreateAFile(std::string);
 };
 
 
