@@ -17,7 +17,7 @@ public:
 	static map<string, bool> CheckChangedSettings();
 	static void WriteSensorValues(map < string, int>);
 	static void LogSensorValues(map <string, int>);
-	static void CreateFile(string);
+	static void CreateAFile(string);
 };
 
 

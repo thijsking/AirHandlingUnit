@@ -135,12 +135,12 @@ void SettingReader::LogSensorValues(map<string, int> sensorValues)
 	}
 }
 
-void SettingReader::CreateFile(string fileName)
+void SettingReader::CreateAFile(string fileName)
 {
 	fstream file;
 	string path = PATH;
 	path += fileName + ".txt";
 
-	file.open(fileName.c_str(), fstream::out);
+	file.open(path.c_str(), fstream::out);
 	file.close();
 }

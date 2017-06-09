@@ -8,6 +8,8 @@
 int main()
 {
 	Control* ControlMode = NULL;
+	SettingReader::CreateAFile("mode");
+
 	while (ControlMode == NULL)
 	{
 		string mode = SettingReader::ReadControlMode();

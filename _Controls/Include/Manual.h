@@ -3,6 +3,7 @@
 
 #include "Control.h"
 #include <ctime>
+#include <vector>
 
 class Manual : public Control
 {

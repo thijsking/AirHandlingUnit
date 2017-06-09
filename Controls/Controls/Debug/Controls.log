@@ -1,10 +1,4 @@
-﻿  SettingReader.cpp
-  Manual.cpp
-  Automatic.cpp
-  Generating Code...
-c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\controls\controls\settingreader.cpp(46): warning C4715: 'SettingReader::ReadControlMode': not all control paths return a value
-  Compiling...
-  main.cpp
-  Generating Code...
+﻿  Manual.cpp
+c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\controls\controls\manual.cpp(17): warning C4018: '<': signed/unsigned mismatch
   Controls.vcxproj -> C:\Users\Thijs\Documents\school\project\Air Handeling Unit\code\AirHandlingUnit\Controls\Debug\Controls.exe
   Controls.vcxproj -> C:\Users\Thijs\Documents\school\project\Air Handeling Unit\code\AirHandlingUnit\Controls\Debug\Controls.pdb (Partial PDB)
