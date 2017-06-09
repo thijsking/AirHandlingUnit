@@ -15,6 +15,9 @@ void Controller::Initialze()
 	iCommunication* pwm = new PWM();
 	iCommunication* serial = new Serial();
 	
+	uint8_t pinPwm[] = {13,132,1548,1558,1589,41,13484,813};
+	pwm->Initialze(pinPwm, sizeof(pinPwm));
+	
 	ActuatorMap["fan1"] = new Fan(pwm, 123);
 	ActuatorMap["fan2"] = new Fan(pwm, 123);
 	ActuatorMap["heating1"] = new HeatingElement(pwm, 123);

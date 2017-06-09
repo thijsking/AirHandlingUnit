@@ -9,7 +9,7 @@ class Manual : public Control
 public:
 	Manual();
 	virtual ~Manual();
-	virtual void InitializeController();
+	virtual void Initialize();
 	virtual void Update();
 private:
 	void LogSensorValues();
