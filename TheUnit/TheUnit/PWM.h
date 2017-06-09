@@ -1,16 +1,16 @@
 #ifndef PWM_H
 #define PWM_H
 
-#include "iCommunication.h";
+#include "iCommunication.h"
 
 class PWM : public iCommunication
 {
 public:
-	PWM(int pin, int initialValue, int pwmRange);
-	void Write(int value);
+	PWM();
 	virtual ~PWM();
-private:
-	int pin;
+	virtual bool Initialize();
+	virtual bool Write(uint8_t data, uint8_t address);
+	virtual bool Read(uint8_t* buffer, uint8_t length); //empty
 };
 
 

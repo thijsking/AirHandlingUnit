@@ -6,8 +6,12 @@
 class Humidity : public iSensor
 {
 public:
-	Humidity();
+	Humidity(iCommunication*, uint8_t);
 	virtual  ~Humidity();
+	virtual double GetValue();
+private:
+	uint8_t Address;
+	iCommunication* Communication;
 };
 
 

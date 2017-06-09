@@ -3,19 +3,15 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-using namespace std;
+#include <cstdint>
 
 class iCommunication
 {
 public:
 	virtual ~iCommunication() = 0;
-	virtual void Initialize() = 0;
-	virtual void Write(int) = 0;
-	virtual int Read() = 0;
-
+	virtual bool Initialize() = 0;
+	virtual bool Write(uint8_t data, uint8_t address) = 0;
+	virtual bool Read(uint8_t* data, uint8_t length) = 0;
 };
-
-
 
 #endif

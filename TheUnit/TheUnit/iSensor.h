@@ -3,8 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-using namespace std;
+#include <iostream>
+#include "iCommunication.h"
 
 class iCommunication;
 
@@ -12,13 +12,7 @@ class iSensor
 {
 public:
 	virtual ~iSensor() = 0;
-	virtual void Initialize() = 0;
-	virtual int GetValue() = 0;
-protected:
-	iCommunication *Communication;
-
+	virtual double GetValue() = 0;
 };
 
-
-
-#endif
+#endif 
