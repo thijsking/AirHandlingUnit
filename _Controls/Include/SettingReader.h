@@ -17,7 +17,7 @@ public:
 	static std::map<std::string, bool> CheckChangedSettings();
 	static void WriteSensorValues(std::map < std::string, int>);
 	static void LogSensorValues(std::map <std::string, int>);
-	static void CreateFile(std::string);
+	static void CreateAFile(std::string);
 };
 
 

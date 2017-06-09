@@ -13,7 +13,7 @@ void Manual::Initialize()
 {
 	// mController = ControllerBuilder::GetController();
 	
-	vector<std::string> fileNames = { "cooling","fan","vents","settingChanged","heating" };
+	std::vector<std::string> fileNames = { "cooling","fan","vents","settingChanged","heating" };
 	for (int i = 0; i < fileNames.size(); i++)
 	{
 		SettingReader::CreateAFile(fileNames[i]);

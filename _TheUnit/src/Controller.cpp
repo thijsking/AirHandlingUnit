@@ -13,7 +13,7 @@ void Controller::Initialize()
 {
 	iCommunication* i2c = new I2C();
 	iCommunication* pwm = new PWM();
-	iCommunication* serial = new Serial();
+//	iCommunication* serial = new Serial();
 	
 	uint8_t pinPwm[] = {13,12,18,15,19,41,34,3};
 	(static_cast<PWM*>(pwm))->Initialize(pinPwm, sizeof(pinPwm));
@@ -28,8 +28,8 @@ void Controller::Initialize()
 	ActuatorMap["vent3"] = new Flaps(pwm, 123);
 	ActuatorMap["vent4"] = new Flaps(pwm, 123);
 
-	SensorMap["CO2-1"] = new CO2(serial, 123);
-	SensorMap["CO2-2"] = new CO2(serial, 123);
+//	SensorMap["CO2-1"] = new CO2(serial, 123);
+//	SensorMap["CO2-2"] = new CO2(serial, 123);
 	SensorMap["tempeature1"] = new Temperature(i2c, 123);
 	SensorMap["tempeature2"] = new Temperature(i2c, 123);
 	SensorMap["tempeature3"] = new Temperature(i2c, 123);

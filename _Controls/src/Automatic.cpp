@@ -16,5 +16,5 @@ void Automatic::Initialize()
 
 void Automatic::Update()
 {
-	cout << "updating" << endl;
+	std::cout << "updating" << std::endl;
 }
