@@ -112,7 +112,7 @@ void SettingReader::WriteSensorValues(map<string, int> sensorValues)
 	{
 		for (map<string, int>::const_iterator i = sensorValues.begin(); i != sensorValues.end(); i++)
 		{
-			file << i->first << "," << i->second << endl;
+			file << i->first << "," << i->second << ";" << endl;
 		}
 	}
 	file.close();

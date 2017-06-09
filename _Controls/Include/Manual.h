@@ -2,6 +2,7 @@
 #define MANUAL_H
 
 #include "Control.h"
+#include <ctime>
 
 class Manual : public Control
 {
@@ -11,6 +12,8 @@ public:
 	virtual void InitializeController();
 	virtual void Update();
 private:
+	void LogSensorValues();
+	void LogSensorValues(string);
 	Controller* mController;
 };
 

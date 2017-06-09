@@ -11,43 +11,54 @@ Manual::~Manual()
 
 void Manual::InitializeController()
 {
-	mController = ControllerBuilder::GetController();
+	// mController = ControllerBuilder::GetController();
 }
 
 void Manual::Update()
 {
-	map<string, int> componentsValue;
 	map<string, bool> changed = SettingReader::CheckChangedSettings();
 
 	if (changed["fan"])
 	{
-		componentsValue = SettingReader::ReadSetings("fan");
-		for (map<string, int>::const_iterator i = componentsValue.begin(); i != componentsValue.end(); i++)
-			//mController->SetFanSpeed(i->first, i->second);
-			cout << "update " << i->first << "with value " << i->second << endl;
+		LogSensorValues("fan");
 	}
 	if (changed["heating"])
 	{
-		componentsValue = SettingReader::ReadSetings("heating");
-		for (map<string, int>::const_iterator i = componentsValue.begin(); i != componentsValue.end(); i++)
-			//mController->SetHeatingTemperature(i->first, i->second);
-			cout << "update " << i->first << "with value " << i->second << endl;
+		LogSensorValues("heating");
 	}
 	if (changed["cooling"])
 	{
-		componentsValue = SettingReader::ReadSetings("cooling");
-		for (map<string, int>::const_iterator i = componentsValue.begin(); i != componentsValue.end(); i++)
-			//mController->SetCoolingTemperature(i->first, i->second);
-			cout << "update " << i->first << "with value " << i->second << endl;
+		LogSensorValues("cooling");
 	}
 	if (changed["vents"])
 	{
-		componentsValue = SettingReader::ReadSetings("vents");
-		for (map<string, int>::const_iterator i = componentsValue.begin(); i != componentsValue.end(); i++)
-			//mController->SetVentAngle(i->first, i->second);
-			cout << "update " << i->first << "with value " << i->second << endl;
+		LogSensorValues("vents");
 	}
 
 	//SettingReader::WriteSensorValues(mController->GetSensorValue());
+	LogSensorValues();
+}
+
+void Manual::LogSensorValues(string actuator)
+{
+	map<string, int> componentsValue;
+
+	componentsValue = SettingReader::ReadSetings(actuator);
+	for (map<string, int>::const_iterator i = componentsValue.begin(); i != componentsValue.end(); i++)
+		//mController->SetActuatorValue(i->first, i->second);
+		cout << "update " << i->first << "with value " << i->second << endl;
+}
+
+void Manual::LogSensorValues()
+{
+	static std::clock_t startTime = std::clock();
+	
+	double timePassed = (std::clock() - startTime) / (double)CLOCKS_PER_SEC;
+	if (timePassed > 10.0)
+	{
+		//SettingReader::LogSensorValues(mController->GetSensorValue);
+		startTime = std::clock();
+		cout << "logging because duration is " << timePassed << endl;
+	}
 }
 
