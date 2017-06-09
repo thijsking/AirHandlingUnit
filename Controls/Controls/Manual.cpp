@@ -26,26 +26,26 @@ void Manual::Update()
 
 	if (changed["fan"])
 	{
-		LogSensorValues("fan");
+		WriteActuatorValue("fan");
 	}
 	if (changed["heating"])
 	{
-		LogSensorValues("heating");
+		WriteActuatorValue("heating");
 	}
 	if (changed["cooling"])
 	{
-		LogSensorValues("cooling");
+		WriteActuatorValue("cooling");
 	}
 	if (changed["vents"])
 	{
-		LogSensorValues("vents");
+		WriteActuatorValue("vents");
 	}
 
 	//SettingReader::WriteSensorValues(mController->GetSensorValue());
 	LogSensorValues();
 }
 
-void Manual::LogSensorValues(std::string actuator)
+void Manual::WriteActuatorValue(std::string actuator)
 {
 	std::map<std::string, int> componentsValue;
 
