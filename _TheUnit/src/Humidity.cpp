@@ -5,7 +5,8 @@ Humidity::Humidity(iCommunication* comm, uint8_t address):
 {
 }
 
-//TODO: should return double
+Humidity::~Humidity(){}
+
 double Humidity::GetValue()
 {
 //TODO: use results of bool functions for error checking

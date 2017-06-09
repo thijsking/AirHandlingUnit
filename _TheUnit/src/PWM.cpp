@@ -15,6 +15,8 @@ https://github.com/WiringPi/WiringPi/blob/master/wiringPi/wiringPi.c#L2142-L2151
 	}
 }
 
+PWM::~PWM(){}
+
 bool PWM::Initialize(){
 	return false; //DO NOT USE
 }

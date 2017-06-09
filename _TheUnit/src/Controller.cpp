@@ -2,21 +2,21 @@
 
 Controller::Controller()
 {
-	Initialze();
+	Initialize();
 }
 
 Controller::~Controller()
 {
 }
 
-void Controller::Initialze()
+void Controller::Initialize()
 {
 	iCommunication* i2c = new I2C();
 	iCommunication* pwm = new PWM();
 	iCommunication* serial = new Serial();
 	
-	uint8_t pinPwm[] = {13,132,1548,1558,1589,41,13484,813};
-	pwm->Initialze(pinPwm, sizeof(pinPwm));
+	uint8_t pinPwm[] = {13,12,18,15,19,41,34,3};
+	(static_cast<PWM*>(pwm))->Initialize(pinPwm, sizeof(pinPwm));
 	
 	ActuatorMap["fan1"] = new Fan(pwm, 123);
 	ActuatorMap["fan2"] = new Fan(pwm, 123);
