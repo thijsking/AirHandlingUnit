@@ -1,4 +1,3 @@
-﻿  Manual.cpp
-c:\users\thijs\documents\school\project\air handeling unit\code\airhandlingunit\controls\controls\manual.cpp(17): warning C4018: '<': signed/unsigned mismatch
+﻿  main.cpp
   Controls.vcxproj -> C:\Users\Thijs\Documents\school\project\Air Handeling Unit\code\AirHandlingUnit\Controls\Debug\Controls.exe
   Controls.vcxproj -> C:\Users\Thijs\Documents\school\project\Air Handeling Unit\code\AirHandlingUnit\Controls\Debug\Controls.pdb (Partial PDB)

@@ -8,7 +8,7 @@
 #include "../../TheUnit/TheUnit/Controller.h"
 #include "../../TheUnit/TheUnit/ControllerBuilder.h"
 
-using namespace std;
+
 
 class Control
 {

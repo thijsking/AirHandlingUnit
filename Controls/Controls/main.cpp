@@ -12,14 +12,14 @@ int main()
 
 	while (ControlMode == NULL)
 	{
-		string mode = SettingReader::ReadControlMode();
+		std::string mode = SettingReader::ReadControlMode();
 		if (mode == "manual")
 			ControlMode = new Manual();
 		else if (mode == "automatic")
 			ControlMode = new Automatic();
 		Sleep(5000);
 	}
-	cout << "mode reconigized" << endl;
+	std::cout << "mode reconigized" << std::endl;
 
 	while (1)
 	{

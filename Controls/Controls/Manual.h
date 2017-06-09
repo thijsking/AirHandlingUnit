@@ -14,7 +14,7 @@ public:
 	virtual void Update();
 private:
 	void LogSensorValues();
-	void LogSensorValues(string);
+	void LogSensorValues(std::string);
 	Controller* mController;
 };
 
