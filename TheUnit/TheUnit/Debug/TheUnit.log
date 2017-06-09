@@ -1,1 +1,60 @@
-﻿
+﻿  Temperature.cpp
+  Serial.cpp
+d:\01 school\practicum\jaar 3\project ahu\github\airhandlingunit\theunit\theunit\serial.cpp(3): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  I2C.cpp
+d:\01 school\practicum\jaar 3\project ahu\github\airhandlingunit\theunit\theunit\i2c.cpp(3): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  HeatingElement.cpp
+d:\01 school\practicum\jaar 3\project ahu\github\airhandlingunit\theunit\theunit\heatingelement.cpp(13): error C2065: 'value': undeclared identifier
+d:\01 school\practicum\jaar 3\project ahu\github\airhandlingunit\theunit\theunit\heatingelement.cpp(14): error C2065: 'value': undeclared identifier
+d:\01 school\practicum\jaar 3\project ahu\github\airhandlingunit\theunit\theunit\heatingelement.cpp(15): error C2065: 'value': undeclared identifier
+d:\01 school\practicum\jaar 3\project ahu\github\airhandlingunit\theunit\theunit\heatingelement.cpp(16): error C2065: 'value': undeclared identifier
+d:\01 school\practicum\jaar 3\project ahu\github\airhandlingunit\theunit\theunit\heatingelement.cpp(18): error C2065: 'value': undeclared identifier
+  Flaps.cpp
+d:\01 school\practicum\jaar 3\project ahu\github\airhandlingunit\theunit\theunit\flaps.cpp(4): error C2612: trailing '}' illegal in base/member initializer list
+  CoolingElement.cpp
+d:\01 school\practicum\jaar 3\project ahu\github\airhandlingunit\theunit\theunit\coolingelement.cpp(13): error C2065: 'value': undeclared identifier
+d:\01 school\practicum\jaar 3\project ahu\github\airhandlingunit\theunit\theunit\coolingelement.cpp(14): error C2065: 'value': undeclared identifier
+d:\01 school\practicum\jaar 3\project ahu\github\airhandlingunit\theunit\theunit\coolingelement.cpp(15): error C2065: 'value': undeclared identifier
+d:\01 school\practicum\jaar 3\project ahu\github\airhandlingunit\theunit\theunit\coolingelement.cpp(16): error C2065: 'value': undeclared identifier
+d:\01 school\practicum\jaar 3\project ahu\github\airhandlingunit\theunit\theunit\coolingelement.cpp(18): error C2065: 'value': undeclared identifier
+  Controller.cpp
+d:\01 school\practicum\jaar 3\project ahu\github\airhandlingunit\theunit\theunit\controller.cpp(57): error C2679: binary '<<': no operator found which takes a right-hand operand of type 'std::string' (or there is no acceptable conversion)
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(488): note: could be 'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(std::basic_streambuf<char,std::char_traits<char>> *)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(468): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(const void *)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(448): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(long double)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(428): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(double)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(408): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(float)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(388): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(unsigned __int64)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(368): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(__int64)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(348): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(unsigned long)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(328): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(long)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(308): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(unsigned int)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(283): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(int)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(263): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(unsigned short)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(229): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(short)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(209): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(bool)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(203): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(std::ios_base &(__cdecl *)(std::ios_base &))'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(197): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(std::basic_ios<char,std::char_traits<char>> &(__cdecl *)(std::basic_ios<char,std::char_traits<char>> &))'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(192): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(std::basic_ostream<char,std::char_traits<char>> &(__cdecl *)(std::basic_ostream<char,std::char_traits<char>> &))'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(684): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<char,std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,const char *)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(731): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<char,std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,char)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(769): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,const char *)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(816): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,char)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(942): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,const signed char *)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(949): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,signed char)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(956): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,const unsigned char *)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(963): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,unsigned char)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(973): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<char,std::char_traits<char>,std::string>(std::basic_ostream<char,std::char_traits<char>> &&,const _Ty &)'
+          with
+          [
+              _Ty=std::string
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\ostream(1011): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<char,std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,const std::error_code &)'
+  d:\01 school\practicum\jaar 3\project ahu\github\airhandlingunit\theunit\theunit\controller.cpp(57): note: while trying to match the argument list '(std::basic_ostream<char,std::char_traits<char>>, std::string)'
+  CO2.cpp
+  Generating Code...
+d:\01 school\practicum\jaar 3\project ahu\github\airhandlingunit\theunit\theunit\co2.cpp(15): error C4716: 'CO2::GetValue': must return a value
+d:\01 school\practicum\jaar 3\project ahu\github\airhandlingunit\theunit\theunit\temperature.cpp(15): error C4716: 'Temperature::GetValue': must return a value
+  Compiling...
+  ControllerBuilder.cpp
+  Generating Code...

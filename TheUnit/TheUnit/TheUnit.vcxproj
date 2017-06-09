@@ -92,6 +92,7 @@
     <ClCompile Include="Humidity.cpp" />
     <ClCompile Include="I2C.cpp" />
     <ClCompile Include="iActuator.cpp" />
+    <ClCompile Include="Serial.cpp" />
     <ClCompile Include="Temperature.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
