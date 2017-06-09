@@ -45,7 +45,7 @@ void Manual::Update()
 	LogSensorValues();
 }
 
-void Manual::LogSensorValues(std::string actuator)
+void Manual::WriteSensorValues(std::string actuator)
 {
 	std::map<std::string, int> componentsValue;
 

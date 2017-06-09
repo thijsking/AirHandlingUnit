@@ -13,7 +13,7 @@ public:
 	virtual void Initialize();
 	virtual void Update();
 private:
-	void LogSensorValues();
+	void WriteSensorValues();
 	void LogSensorValues(std::string);
 	Controller* mController;
 };
