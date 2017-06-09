@@ -39,7 +39,7 @@ string SettingReader::ReadControlMode()
 	{
 		string mode;
 		getline(file, mode);
-		//cout << "mode: " << mode << endl;
+		cout << "mode: " << mode << endl;
 		return mode;
 	}
 	file.close();
