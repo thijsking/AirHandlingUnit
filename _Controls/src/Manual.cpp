@@ -11,7 +11,7 @@ Manual::~Manual()
 
 void Manual::Initialize()
 {
-	// mController = ControllerBuilder::GetController();
+	mController = ControllerBuilder::GetController();
 	
 	std::vector<std::string> fileNames = { "cooling","fan","vents","settingChanged","heating" };
 	for (int i = 0; i < fileNames.size(); i++)
@@ -51,8 +51,8 @@ void Manual::LogSensorValues(std::string actuator)
 
 	componentsValue = SettingReader::ReadSetings(actuator);
 	for (std::map<std::string, int>::const_iterator i = componentsValue.begin(); i != componentsValue.end(); i++)
-		//mController->SetActuatorValue(i->first, i->second);
-		std::cout << "update " << i->first << "with value " << i->second << std::endl;
+		mController->SetActuatorValue(i->first, i->second);
+		//std::cout << "update " << i->first << "with value " << i->second << std::endl;
 }
 
 void Manual::LogSensorValues()
