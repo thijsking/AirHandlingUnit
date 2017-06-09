@@ -3,15 +3,19 @@
 
 Manual::Manual()
 {
-	InitializeController();
+	Initialize();
 }
 
 Manual::~Manual()
 {}
 
-void Manual::InitializeController()
+void Manual::Initialize()
 {
 	// mController = ControllerBuilder::GetController();
+	
+	string fileNames[] = { "cooling","fan","mode","vents","settingChanged","heating" };
+	for (int i = 0; i < sizeof(fileNames); i++)
+		SettingReader::CreateFile(fileNames[i]);
 }
 
 void Manual::Update()

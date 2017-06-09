@@ -2,13 +2,13 @@
 
 Automatic::Automatic()
 {
-	InitializeController();
+	Initialize();
 }
 
 Automatic::~Automatic()
 {}
 
-void Automatic::InitializeController()
+void Automatic::Initialize()
 {
 
 	//mController = ControlBuilder::GetController();
