@@ -20,9 +20,10 @@ PWM::~PWM(){}
 bool PWM::Initialize(){
 	return false; //DO NOT USE
 }
+
 bool PWM::Initialize(uint8_t* pins, size_t size){
-	for(int i = 0; i<size; i++){
-		if(!softPwmCreate(pins[i], 0, 100)){
+	for(uint8_t i = 0; i<size; i++){
+		if(softPwmCreate(pins[i], 0, 100)){
 			return false;
 		}
 	}
