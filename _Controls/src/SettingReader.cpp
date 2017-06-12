@@ -101,7 +101,7 @@ std::map<std::string, bool> SettingReader::CheckChangedSettings()
 	return changed;
 }
 
-void SettingReader::WriteSensorValues(std::map<std::string, int> sensorValues)
+void SettingReader::WriteSensorValues(std::map<std::string, double> sensorValues)
 {
 	std::fstream file;
 	std::string path = PATH;
@@ -110,7 +110,7 @@ void SettingReader::WriteSensorValues(std::map<std::string, int> sensorValues)
 	file.open(path.c_str(), std::fstream::out | std::fstream::trunc);
 	if (file.is_open())
 	{
-		for (std::map<std::string, int>::const_iterator i = sensorValues.begin(); i != sensorValues.end(); i++)
+		for (std::map<std::string, double>::const_iterator i = sensorValues.begin(); i != sensorValues.end(); i++)
 		{
 			file << i->first << "," << i->second << ";" << std::endl;
 		}
@@ -118,7 +118,7 @@ void SettingReader::WriteSensorValues(std::map<std::string, int> sensorValues)
 	file.close();
 }
 
-void SettingReader::LogSensorValues(std::map<std::string, int> sensorValues)
+void SettingReader::LogSensorValues(std::map<std::string, double> sensorValues)
 {
 	std::fstream file;
 	std::string path = PATH;
@@ -128,7 +128,7 @@ void SettingReader::LogSensorValues(std::map<std::string, int> sensorValues)
 	file.open(path.c_str(), std::fstream::out);
 	if (file.is_open())
 	{
-		for (std::map<std::string, int>::const_iterator i = sensorValues.begin(); i != sensorValues.end(); i++)
+		for (std::map<std::string, double>::const_iterator i = sensorValues.begin(); i != sensorValues.end(); i++)
 		{
 			file << i->first << "," << i->second << std::endl;
 		}

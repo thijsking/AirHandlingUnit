@@ -41,7 +41,7 @@ void Manual::Update()
 		WriteActuatorValue("vents");
 	}
 
-	//SettingReader::WriteSensorValues(mController->GetSensorValue());
+	SettingReader::WriteSensorValues(mController->GetSensorValue());
 	LogSensorValues();
 }
 
@@ -62,7 +62,7 @@ void Manual::LogSensorValues()
 	double timePassed = (std::clock() - startTime) / (double)CLOCKS_PER_SEC;
 	if (timePassed > 10.0)
 	{
-		//SettingReader::LogSensorValues(mController->GetSensorValue);
+		SettingReader::LogSensorValues(mController->GetSensorValue());
 		startTime = std::clock();
 		std::cout << "logging because duration is " << timePassed << std::endl;
 	}

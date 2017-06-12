@@ -26,7 +26,7 @@ bool I2C::Write(uint8_t data, uint8_t address){
 			return false;
 		}
 	}
-	return _write(address, data);
+	return _write(SENSOR_ADDRESS, data);
 }
 
 bool I2C::_setSlave(uint8_t target){
