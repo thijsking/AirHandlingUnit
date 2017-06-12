@@ -16,9 +16,11 @@ Serial::~Serial()
 
 bool Serial::Initialize()
 {
-	uart0_filestream = open("dev/ttyAMA0", O_RDWR | O_NOCTTY | O_NDELAY);
-	if (uart0_filestream == -1)
+	uart0_filestream = open("/dev/ttyS0", O_RDWR | O_NOCTTY | O_NDELAY);
+	if (uart0_filestream == -1){
 		std::cout << "Error - Unable to open UART." << std::endl;
+		return false;
+	}
 
 	struct termios options;
 	tcgetattr(uart0_filestream, &options);
@@ -28,6 +30,7 @@ bool Serial::Initialize()
 	options.c_lflag = 0;
 	tcflush(uart0_filestream, TCIFLUSH);
 	tcsetattr(uart0_filestream, TCSANOW, &options);
+	return true;
 }
 
 bool Serial::Write(uint8_t data, uint8_t address)
@@ -53,8 +56,10 @@ bool Serial::Write(uint8_t data, uint8_t address)
 		{
 			std::cerr << "UART TX ERROR" << std::endl;
 			std::cerr << "data " << data << " ,adress " << address << std::endl;
+			return false;
 		}
 	}
+	return true;
 }
 
 bool Serial::Read(uint8_t* data, uint8_t length)
@@ -77,4 +82,5 @@ bool Serial::Read(uint8_t* data, uint8_t length)
 			}
 		}
 	}
+	return true;
 }
