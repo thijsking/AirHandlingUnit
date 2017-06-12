@@ -8,7 +8,7 @@
 <?php
 #/home/pi/git/AirHandlingUnit/_Controls/config/mode.txt
 $file_name = "mode";
-$path = "" . $file_name . ".txt";
+$path = "/home/pi/git/AirHandlingUnit/_Controls/config/" . $file_name . ".txt";
 $file = fopen($path, "r+") or die("Unable to open file");
 $data = fread($file,(filesize("mode.txt") + 1));
 $operation_mode = NULL;

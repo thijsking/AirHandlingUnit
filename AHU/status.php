@@ -5,7 +5,7 @@
 <body>
 <?php 
 $file_name = "sensorValues";
-$path = "" . $file_name . ".txt";
+$path = "/home/pi/git/AirHandlingUnit/_Controls/config/" . $file_name . ".txt";
 $file = fopen($path, "r+") or die("Unable to open file");
 $data = fread($file,(filesize("sensorValues.txt") + 1));
 

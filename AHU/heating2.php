@@ -6,7 +6,7 @@
 <h2>Please select the desired value for heating 2</h2>
 <?php 
 $file_name = "heating";
-$path = "" . $file_name . ".txt";
+$path = "/home/pi/git/AirHandlingUnit/_Controls/config/" . $file_name . ".txt";
 $file = fopen($path, "r+") or die("Unable to open file");
 $data = fread($file,(filesize("heating.txt") + 1));
 $value = NULL;
