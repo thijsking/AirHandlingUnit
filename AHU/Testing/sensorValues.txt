@@ -1,0 +1,17 @@
+co2-1,5000;
+temperature1,15;
+temperature2,15;
+temperature3,15;
+temperature4,15;
+temperature5,15;
+temperature6,15;
+temperature7,15;
+temperature8,15;
+humidity1,10;
+humidity2,10;
+humidity3,10;
+humidity4,10;
+humidity5,10;
+humidity6,10;
+humidity7,10;
+humidity8,10;
