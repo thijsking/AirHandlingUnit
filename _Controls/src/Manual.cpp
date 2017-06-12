@@ -57,13 +57,15 @@ void Manual::WriteActuatorValue(std::string actuator)
 
 void Manual::LogSensorValues()
 {
-	static std::clock_t startTime = std::clock();
-	
-	double timePassed = (std::clock() - startTime) / (double)CLOCKS_PER_SEC;
+	//static std::clock_t startTime = std::clock();
+	static std::time_t startTime = std::time(nullptr);
+	std::time_t timePassed = std::time(nullptr) - startTime;
+	//double timePassed = (std::clock() - startTime) / (double)CLOCKS_PER_SEC;
 	if (timePassed > 10.0)
 	{
 		SettingReader::LogSensorValues(mController->GetSensorValue());
-		startTime = std::clock();
+		startTime = std::time(nullptr);
+		//startTime = std::clock();
 		std::cout << "logging because duration is " << timePassed << std::endl;
 	}
 }

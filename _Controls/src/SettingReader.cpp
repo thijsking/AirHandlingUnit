@@ -121,16 +121,16 @@ void SettingReader::WriteSensorValues(std::map<std::string, double> sensorValues
 void SettingReader::LogSensorValues(std::map<std::string, double> sensorValues)
 {
 	std::fstream file;
-	std::string path = PATH;
-	std::string date = __TIMESTAMP__;
-	path += "log/" + date;
+	std::time_t now = std::time(nullptr);
+	std::string date = ctime(&now);
+	std::string path = "./log/" + date;
 
 	file.open(path.c_str(), std::fstream::out);
 	if (file.is_open())
 	{
 		for (std::map<std::string, double>::const_iterator i = sensorValues.begin(); i != sensorValues.end(); i++)
 		{
-			file << i->first << "," << i->second << std::endl;
+			file << i->first << ":\t" << i->second << std::endl;
 		}
 	}
 }
