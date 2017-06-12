@@ -6,6 +6,7 @@
 
 #define FILENAME_I2C "/dev/i2c-1"
 #define MULTIPLEXER_ADDRESS 0x70 //depends on A2:0 pins
+#define SENSOR_ADDRESS 0x40
 
 class I2C : public iCommunication
 {

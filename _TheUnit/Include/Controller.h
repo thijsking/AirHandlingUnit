@@ -24,7 +24,7 @@ class Controller
 public:
 	Controller();
 	virtual ~Controller();
-	virtual void Initialze();
+	virtual void Initialize();
 	virtual void SetActuatorValue(std::string,uint8_t); 
 	virtual std::map<std::string, double> GetSensorValue();
 private:

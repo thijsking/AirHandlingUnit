@@ -2,13 +2,13 @@
 
 Automatic::Automatic()
 {
-	InitializeController();
+	Initialize();
 }
 
 Automatic::~Automatic()
 {}
 
-void Automatic::InitializeController()
+void Automatic::Initialize()
 {
 
 	//mController = ControlBuilder::GetController();
@@ -16,5 +16,5 @@ void Automatic::InitializeController()
 
 void Automatic::Update()
 {
-	cout << "updating" << endl;
+	std::cout << "updating" << std::endl;
 }

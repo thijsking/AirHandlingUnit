@@ -1,5 +1,7 @@
 #include "ControllerBuilder.h"
 
+Controller* ControllerBuilder::Instance;
+
 ControllerBuilder::ControllerBuilder()
 {
 

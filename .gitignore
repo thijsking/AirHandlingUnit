@@ -1,1 +1,4 @@
 *.o
+_Controls/main
+_Controls/config
+_Controls/log

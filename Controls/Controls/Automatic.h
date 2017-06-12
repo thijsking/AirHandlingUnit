@@ -8,7 +8,7 @@ class Automatic : public Control
 public:
 	Automatic();
 	virtual ~Automatic();
-	virtual void InitializeController();
+	virtual void Initialize();
 	virtual void Update();
 private:
 	Controller* mController;

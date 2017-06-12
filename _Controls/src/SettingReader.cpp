@@ -3,43 +3,43 @@
 
 #define PATH "./config/"
 
-map<string,int> SettingReader::ReadSetings(string component)
+std::map<std::string,int> SettingReader::ReadSetings(std::string component)
 {
-	map<string, int> mapComponent;
-	ifstream file;
-	string path = PATH;
+	std::map<std::string, int> mapComponent;
+	std::ifstream file;
+	std::string path = PATH;
 	path += component + ".txt";
 
 file.open(path.c_str());
 if (file.is_open())
 {
-	string line;
+	std::string line;
 	while (getline(file, line))
 	{
 		int comma = line.find(',');
-		string name = line.substr(0, comma);
-		string valueStr = line.substr(comma + 1);
+		std::string name = line.substr(0, comma);
+		std::string valueStr = line.substr(comma + 1);
 		int value = atoi(valueStr.c_str());
 		mapComponent[name] = value;
-		cout << name << ":" << value << endl;
+		std::cout << name << ":" << value << std::endl;
 	}
 }
 file.close();
 return mapComponent;
 }
 
-string SettingReader::ReadControlMode()
+std::string SettingReader::ReadControlMode()
 {
-	ifstream file;
-	string path = PATH;
+	std::ifstream file;
+	std::string path = PATH;
 	path += "mode.txt";
 
 	file.open(path.c_str());
 	if (file.is_open())
 	{
-		string mode;
+		std::string mode;
 		getline(file, mode);
-		//cout << "mode: " << mode << endl;
+		//std::cout << "mode: " << mode << std::endl;
 		return mode;
 	}
 	file.close();
@@ -51,8 +51,8 @@ string SettingReader::ReadControlMode()
 */
 void SettingReader::CheckControlMode(Control* control)
 {
-	static string currentMode;
-	string newMode;
+	static std::string currentMode;
+	std::string newMode;
 
 	newMode = ReadControlMode();
 	if (newMode == currentMode)
@@ -70,22 +70,22 @@ void SettingReader::CheckControlMode(Control* control)
 		currentMode = "automatic";
 	}
 	else
-		cout << "ERROR: wrong mode type written to the config file" << endl;
+		std::cout << "ERROR: wrong mode type written to the config file" << std::endl;
 
 }
 
-map<string, bool> SettingReader::CheckChangedSettings()
+std::map<std::string, bool> SettingReader::CheckChangedSettings()
 {
-	map<string, bool> changed;
-	ifstream file;
-	string path = PATH;
+	std::map<std::string, bool> changed;
+	std::ifstream file;
+	std::string path = PATH;
 	path += "settingChanged.txt";
 	bool changedHappend = false;
 
 	file.open(path.c_str());
 	if (file.is_open())
 	{
-		string component;
+		std::string component;
 		while (getline(file, component))
 		{
 			changed[component] = true;
@@ -95,42 +95,52 @@ map<string, bool> SettingReader::CheckChangedSettings()
 	file.close();
 	if (changedHappend)
 	{
-		file.open(path.c_str(), fstream::out | fstream::trunc);
+		file.open(path.c_str(), std::fstream::out | std::fstream::trunc);
 		file.close();
 	}
 	return changed;
 }
 
-void SettingReader::WriteSensorValues(map<string, int> sensorValues)
+void SettingReader::WriteSensorValues(std::map<std::string, double> sensorValues)
 {
-	fstream file;
-	string path = PATH;
+	std::fstream file;
+	std::string path = PATH;
 	path += "sensorValues.txt";
 
-	file.open(path.c_str(), fstream::out | fstream::trunc);
+	file.open(path.c_str(), std::fstream::out | std::fstream::trunc);
 	if (file.is_open())
 	{
-		for (map<string, int>::const_iterator i = sensorValues.begin(); i != sensorValues.end(); i++)
+		for (std::map<std::string, double>::const_iterator i = sensorValues.begin(); i != sensorValues.end(); i++)
 		{
-			file << i->first << "," << i->second << ";" << endl;
+			file << i->first << "," << i->second << ";" << std::endl;
 		}
 	}
 	file.close();
 }
 
-void SettingReader::LogSensorValues(map<string, int> sensorValues)
+void SettingReader::LogSensorValues(std::map<std::string, double> sensorValues)
 {
-	fstream file;
-	string path = PATH;
-	string date = __TIMESTAMP__;
-	path += "log/" + date;
+	std::fstream file;
+	std::time_t now = std::time(nullptr);
+	std::string date = ctime(&now);
+	std::string path = "./log/" + date;
 
-	file.open(path.c_str(), fstream::out);
+	file.open(path.c_str(), std::fstream::out);
 	if (file.is_open())
 	{
-		for (map<string, int>::const_iterator i = sensorValues.begin(); i != sensorValues.end(); i++)
+		for (std::map<std::string, double>::const_iterator i = sensorValues.begin(); i != sensorValues.end(); i++)
 		{
-			file << i->first << "," << i->second << endl;
+			file << i->first << ":\t" << i->second << std::endl;
 		}
 	}
+}
+
+void SettingReader::CreateAFile(std::string fileName)
+{
+	std::fstream file;
+	std::string path = PATH;
+	path += fileName + ".txt";
+
+	file.open(path.c_str(), std::fstream::out);
+	file.close();
 }

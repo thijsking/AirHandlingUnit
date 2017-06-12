@@ -8,12 +8,11 @@
 #include "Controller.h"
 #include "ControllerBuilder.h"
 
-using namespace std;
 
 class Control
 {
 public:
-	virtual void InitializeController() = 0;
+	virtual void Initialize() = 0;
 	virtual void Update() = 0;
 };
 
