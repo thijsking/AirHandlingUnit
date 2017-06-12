@@ -11,6 +11,8 @@ public:
 	virtual bool Initialize();
 	virtual bool Write(uint8_t data, uint8_t address);
 	virtual bool Read(uint8_t* data, uint8_t length);
+private:
+	int uart0_filestream = -1;
 };
 
 
