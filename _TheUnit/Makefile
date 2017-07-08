@@ -13,3 +13,6 @@ clean:
 	@rm -f $(OBJS)
 
 print-%: ; @echo $*=$($*)
+
+docs:
+	@doxygen

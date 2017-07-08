@@ -78,6 +78,7 @@ bool I2C::Read(uint8_t* buffer, uint8_t length){
 	return true;
 }
 
-//TODO: empty on purpose for now
-bool I2C::Initialize(){}
+bool I2C::Initialize(){
+	return true;
+}
 
