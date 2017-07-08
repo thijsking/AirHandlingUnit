@@ -4,7 +4,7 @@ SRCS = $(wildcard src/*.cpp)
 OBJS = $(SRCS:.cpp=.o)
 EXTOBJS = $(wildcard ../_TheUnit/src/*.o)
 LIBS = -I Include -I ../_TheUnit/Include
-LFLAGS = -lwiringPi
+LFLAGS = -lwiringPi -lpthread -lrt -lcrypt
 
 all: unit
 
