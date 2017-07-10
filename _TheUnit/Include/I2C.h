@@ -32,10 +32,12 @@ public:
 * \brief Create the I2C communicator and open the i2c bus.
 */
 	I2C();
+
 /**
 * \brief Close the i2c bus and destroy the I2C communicator
 */
 	virtual ~I2C();
+
 /**
 * \brief Write a byte to one of the i2c devices
 *
@@ -46,6 +48,7 @@ public:
 * @return `true` on success, `false` on failure
 */
 	bool Write(uint8_t data,uint8_t address);
+
 /**
 * \brief Read bytes from the i2c device. This function blocks until `length`
 * bytes have been read.
@@ -57,6 +60,7 @@ public:
 * @return `true` on success, `false` on failure
 */
 	bool Read(uint8_t* buffer, uint8_t length);
+
 /**
 * \brief Does nothing. Empty on purpoes
 *
@@ -64,10 +68,43 @@ public:
 */
 	bool Initialize();
 private:
+/**
+* \brief Configure the multiplexer to the correct slave bus
+*
+* @param address A number _N_ from 0 to 7, corresponding to which of the i2c
+* channels of the multiplexer (SD_N_) the target device is connected to.
+*
+* @return `true` on success, `false` on failure
+*/
 	bool _setSlave(uint8_t address); //return true on succes
+
+/**
+* \brief Write a byte to an i2c slave device
+*
+* @param address The i2c address of the slave device
+* @param data The byte to write
+*
+* @return `true` on success, `false` on failure
+*/
 	bool _write(uint8_t address, uint8_t data); //return true on succes
+
+/**
+* \brief Actually write the byte
+*
+* @param data The byte to write
+*
+* @return `true` on success, `false` on failure
+*/
 	bool _writeByte(uint8_t data);
+
+/**
+* \brief The file descriptor that points to the i2c device file
+*/
 	int filedescriptor;
+
+/**
+* \brief The current target of the i2c multiplexer
+*/
 	uint8_t currentTarget;
 };
 
