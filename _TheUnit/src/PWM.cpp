@@ -21,6 +21,11 @@ bool PWM::Initialize(){
 	return false; //DO NOT USE
 }
 
+/**
+* This function loops through all the entries in the pins array, and
+* initializes them with WiringPi's `softPwmCreate()` function, using an initial
+* value of 0 and a range of 100.
+*/
 bool PWM::Initialize(uint8_t* pins, size_t size){
 	for(uint8_t i = 0; i<size; i++){
 		if(softPwmCreate(pins[i], 0, 100)){
@@ -30,6 +35,11 @@ bool PWM::Initialize(uint8_t* pins, size_t size){
 	return true;
 }
 
+/**
+* This function uses WiringPi's `softPwmWrite()` function to set a pwm value to
+* a pin. Since `softPwmWrite()` has no error checking, this function will
+* always return `true`.
+*/
 bool PWM::Write(uint8_t data, uint8_t address){
 	softPwmWrite(address, data);
 	return true;
