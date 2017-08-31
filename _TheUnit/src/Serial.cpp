@@ -14,6 +14,10 @@ Serial::~Serial()
 
 }
 
+/**
+* This function initializes the serial communication by opening the port and setting all 
+* serial parameters to the desired setting. For example, the used baudrate is set to 9600.
+*/
 bool Serial::Initialize()
 {
 	uart0_filestream = open("/dev/ttyS0", O_RDWR | O_NOCTTY | O_NDELAY);
@@ -33,6 +37,11 @@ bool Serial::Initialize()
 	return true;
 }
 
+/**
+* This function writes data to the opened port. The data is hardcoded at this point but can be changed
+* (with some coding) to using the provided `data` variable. The receiver is the component which uses 
+* the address that has been provided.
+*/
 bool Serial::Write(uint8_t data, uint8_t address)
 {
 	unsigned char txBuffer[20];
@@ -62,6 +71,11 @@ bool Serial::Write(uint8_t data, uint8_t address)
 	return true;
 }
 
+/**
+* This function reads data from the opened port. When this function is executed, it remains within
+* this funcion until data is read out. After data is read, the data is assinged to the pointer variable
+* which can be used in the function which executed the read function.
+*/
 bool Serial::Read(uint8_t* data, uint8_t length)
 {
 	bool doneReading = false;
