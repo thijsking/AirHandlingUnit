@@ -4,11 +4,16 @@
 #include <fcntl.h>
 #include <termios.h>
 
+/**
+* Create the serial object and execute the `initialize` function.
+*/
 Serial::Serial() 
 {
 	Initialize();
 }
-
+/**
+* Destroy the serial object
+*/
 Serial::~Serial()
 {
 

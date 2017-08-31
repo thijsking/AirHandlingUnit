@@ -28,7 +28,7 @@ public:
 /**
 * \brief Write data to the receiving component
 *
-* @param data Not used, added for future uasge. Used for passing on desired data to be send.
+* @param data Not used, added for future uasge. When in use: used for passing on desired data to be send.
 * @param address Serial address used to specify which component is the receiver.
 *
 * @return `true` on success, `false` on failure
