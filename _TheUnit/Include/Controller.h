@@ -20,7 +20,7 @@
 #include "CO2.h"
 
 /**
-* \brief This class handles everything that goes on in the AHU. All the comminication to or from the outside goes through this class
+* \brief This class handles everything that goes on in the AHU. All the communication to or from the outside goes through this class
 */
 class Controller
 {
