@@ -4,7 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <cstdint>
-
+/**
+* \brief This is a pure virtual class. It is the interface for all the communication classes(PWM,I2C,Serial)
+*/
 class iCommunication
 {
 public:

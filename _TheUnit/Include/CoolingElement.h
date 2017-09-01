@@ -3,7 +3,7 @@
 
 #include "iActuator.h"
 /**
-* \brief This class handles a Cooling element. 
+* \brief This class handles a CoolingElement. 
 */
 class CoolingElement : public iActuator
 {
@@ -11,7 +11,7 @@ public:
 /**
 * \brief Creates a CoolingElement object.
 *
-* @param iCommunication* is the type of communication that the sensor uses.
+* @param iCommunication* is the type of communication that the actuator uses.
 * @param uint8_t Unique address that the specific Cooling element has.
 */
 	CoolingElement(iCommunication*, uint8_t);
