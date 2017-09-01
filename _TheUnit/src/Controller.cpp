@@ -1,14 +1,21 @@
 #include "Controller.h"
-
+/**
+* Creates the Controller object and calls his Initialize function
+*/
 Controller::Controller()
 {
 	Initialize();
 }
-
+/**
+* Destroy the Controller object
+*/
 Controller::~Controller()
 {
 }
-
+/**
+* This function creates all the sensors and actuators with there communication method
+* After creation they are put in the Actuator- or SensorMap, depending on what they are, so the Controller can find them back to communicate with them
+*/
 void Controller::Initialize()
 {
 	iCommunication* i2c = new I2C();
@@ -48,7 +55,11 @@ void Controller::Initialize()
 //	SensorMap["humidity8"] = new Humidity(i2c, 8);
 
 }
-
+/**
+* This function sets a value to a specified actuator.
+* It searches through the ActuatorMap to find the specified actuator.
+* When he finds it, he will call the actuator SetValue function and gives the value as parameter
+*/
 void Controller::SetActuatorValue(std::string name, uint8_t value)
 {
 	std::map<std::string, iActuator*>::iterator f(ActuatorMap.find(name));
@@ -59,7 +70,10 @@ void Controller::SetActuatorValue(std::string name, uint8_t value)
 	else
 		std::cout << "ERROR: actuator " << name << " doens't exist" << std::endl;
 }
-
+/**
+* This function returns all the sensor values.
+* It goes one for one through the SensorMap to call the snesors GetValue function. This value is stored in a map with the corresponding sensor name 
+*/
 std::map<std::string, double> Controller::GetSensorValue()
 {
 	std::map<std::string, double> returnMap;
