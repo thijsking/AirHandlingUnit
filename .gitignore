@@ -1,4 +1,5 @@
 *.swp
+*.log
 *.o
 _Controls/main
 _Controls/config

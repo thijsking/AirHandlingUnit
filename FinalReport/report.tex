@@ -23,7 +23,9 @@
 		stringstyle=\color{red}\ttfamily,
 		commentstyle=\color{green}\ttfamily,
 		morecomment=[l][\color{magenta}]{\#},
-		tabsize=2
+		tabsize=2,
+		breaklines=true,
+		showstringspaces=false,
 }
 
 %C plus plus
@@ -671,10 +673,159 @@ layout, the temperature sensor would sit next to a humidity sensor at all
 times.
 
 \subsubsection{Combined temperature and humidity sensors}
-%TODO hier verder
+Early on in the design process, we decided on using I2C to communicate with the
+humidity sensors, because it allows many devices to be placed on a single bus.
+However, when researching the humidity sensors, it turned out there are many
+humidity sensors that only have a single fixed I2C address. There were a few
+with the possibility to select one of two I2C addresses, and we found one
+sensor that allows a choice between four different I2C addresses.
+
+As visible in Table \ref{tab:humidity}, this was the Texas Instruments HDC1010
+\cite{HDC1010}. Using the HDC1010, we'd have to use two I2C busses. While there
+is a second I2C bus on the Raspberry Pi, enabling it is not straightforward and
+requires both changing kernel configuration files and soldering a header onto
+the Raspberry Pi. Another disadvantage of the HDC1010 is that it's only sold as
+a surface-mount device, which means it needs to be soldered onto a PCB by
+baking it. While there exist breakout boards for the HDC1010, they were all out
+of stock or discontinued.
+
+Another option was to use an I2C multiplexer, and a simple humidity sensor with
+one I2C address. We found several of these, their details are listed in Table
+\ref{tab:humidity}. It becomes apparent that there is a fairly direct
+relationship between price and capabilities. The more you pay, the higher range
+and the better accuracy you get. Because all three sensors are good enough for
+our purposes, we chose to use the Silicon Labs Si7021 \cite{Si7021}, the
+cheapest of the three.
+
+For the I2C multiplexer, the one that was recommended to us online was the
+Texas Instruments TCA9548A \cite{TCA9548A}, which is an easily controllable
+multiplexer. It is readily available on a breakout board from several Dutch
+online stores, and does not cost much.
+
+\begin{table}[]
+\centering
+%\makebox[\textwidth][c]{
+\begin{tabular}{lllll}
+Name                 & HDC1010                & HTU21D                 & Si7021                & SHT31-D                \\ \hline
+No. of I2C addresses & 4                      & 1                      & 1                     & 1                      \\
+Min. temp            & \SI{5}{\celsius}       & \SI{-40}{\celsius}     & \SI{-10}{\celsius}    & \SI{-40}{\celsius}     \\
+Max. temp            & \SI{60}{\celsius}      & \SI{125}{\celsius}     & \SI{85}{\celsius}     & \SI{125}{\celsius}     \\
+Temp. uncertainty    & \SI{\pm0.2}{\celsius}  & \SI{\pm0.3}{\celsius}  & \SI{\pm0.4}{\celsius} & \SI{\pm0.3}{\celsius}  \\
+Min. humidity        & \SI{0}{\percent}       & \SI{5}{\percent}       & \SI{0}{\percent}      & \SI{0}{\percent}       \\
+Max. humidity        & \SI{100}{\percent}     & \SI{95}{\percent}      & \SI{80}{\percent}     & \SI{100}{\percent}     \\
+Humidity uncertainty & \SI{\pm2}{\percent}    & \SI{\pm2}{\percent}    & \SI{\pm3}{\percent}   & \SI{\pm2}{\percent}    \\
+Price                & \euro 2,52             & \$14.95                & \$6.95                & \$13.95
+\end{tabular}
+%}
+\caption{Comparison of temperature and humidity sensors} %todo cite 4 datasheets
+\label{tab:humidity}
+\end{table}
+
+When we chose to go with the combined sensor which includes both the humidity
+and the temperature sensors, we chose to go with Si7021. These I2C-enabled
+sensor have hardcoded I2C addresses, in this case as shown in the datasheet
+0x40 \cite{Si7021}. To overcome this problem we installed an I2C multiplexer, a
+TCA9548A. This multiplexer is where all of the wiring harnesses are connected.
+After wiring the wiring harnesses which include power, ground and sda/scl for
+each individual sensor, we routed them through the case. The wires are capped
+off at each end with headers so we can easily swap out components if they
+break. The power for the sensors is supplied by the power supply, and is routed
+through the breadboard to the sensors. This was needed because the Raspberry Pi
+was not capable of delivering the required power. 
+
 \subsection{Software}
+\subsubsection{Sensors}
+The the temperature and humidity sensors are very similar in code, because they
+both read data from the Si7021 chips. They both implement the iSensor abstract
+class, and the only differences are in the \lstinline|GetValue()| function.
+
+The \lstinline|Humidity::GetValue()| function first calls the \lstinline|Communication->Write()|
+function (line 4), with the data byte 0xF5. This data byte is the command for
+"Measure relative humidity" \cite{Si7021}. After that, the
+relative humidity can be fetched with a call to \lstinline|Communication->Read()| (line 8).
+Next, we convert the two bytes received into an integer, and use that to
+calculate the relative humidity in percent using the formula in \S5.1.1 of the
+Si7021 Datasheet (lines 10-11).
+
+\lstinputlisting{code/humidity-getvalue.cpp}
+
+The temperature is measured in a very similar manner. There are two
+differences: we write byte 0xE0 ("Read Temperature Value from Previous RH
+Measurement") instead of 0xF5, and the formula for calculating the temperature
+is \lstinline|double temperature = (175.72*result) / 65536 - 46.85| (Si7021
+Datasheet, §5.1.2)
+
+\subsubsection{Multiplexer}
+Because all the Si7021 chips use the same I2C address, they can not be
+connected to the same I2C bus. This is why we decided to use an I2C
+multiplexer. All of the code to handle the multiplexer is in the I2C class.
+
+First, the I2C class implements the iCommunication interface. This means it has
+a \lstinline|Write()| function, which writes a byte to an address, and a \lstinline|Read()| function,
+which reads data into a buffer. It also has some helper functions, namely
+\lstinline|_setSlave()|, \lstinline|_write()|, and \lstinline|_writeByte()|.
+
+\lstinputlisting{code/i2c-class.h}
+
+To fully understand the I2C class, let's walk through a call to
+\lstinline|Write()|. The \lstinline|Write()| function takes two parameters: the
+byte to send (\lstinline|data|), and the address, which is a number from 1 to
+8, depending on which pins of the multiplexer we want to use. First, we check
+if the multiplexer is already set to the address we need to talk to (line 2).
+If it is, we immediately go to the \lstinline|_write()| call at the end of the
+function (line 8). If it is not, we first call \lstinline|_setSlave()| (line
+3).
+
+\lstinputlisting{code/i2c-write.cpp}
+
+\lstinline|_setSlave()| first creates a bitmask for the multiplexer to work
+with (line 2) (source: TCA9548A datasheet). Next, it calls \lstinline|_write()|
+to write the bitmask to the multiplexer (line 3). If the \lstinline|_write()|
+call succeeds, we also save the \lstinline|currentTarget| (line 4).
+
+\lstinputlisting{code/i2c-_setslave.cpp}
+
+The \lstinline|_write()| function uses the syscall \lstinline|ioctl()| (line
+2), which tells Linux which slave address to use for the next I2C read and
+write calls (source: Kernel i2c documentation). (N.B.: the filedescriptor is an
+integer which points to the \lstinline|/dev/i2c-1| special file. This file is
+opened in the constructor.) Next, it calls \lstinline|_writeByte()| to actually
+send the data to the I2C bus (line 8).
+
+\lstinputlisting{code/i2c-_write.cpp}
+
+Last, there is the \lstinline|_writeByte()| function. This function first
+creates a two-character buffer, containing the data byte and a null character
+(line 2).  Next. we call the syscall \lstinline|write()|, which requires a
+null-terminated character array (line 4). If the syscall succeeds, we have
+succesfully written the data byte to the I2C bus.
+
+\lstinputlisting{code/i2c-_writebyte.cpp}
+
+Completely separate from the write functions, there is the
+\lstinline|I2C::Read()| function. First, we create a temporary buffer to store
+data in (line 2). Next, we keep trying to read data into this buffer from the
+I2C special file (line 5). Once we succeed, we copy all but the last byte
+(which is the end-of-file marker) from the temporary buffer to the buffer that
+was provided by the caller (line 14).
+
+\lstinputlisting{code/i2c-read.cpp}
+
 \subsection{Problems}
+One of the problems we could have run into was that of addressing the Si7021
+sensors, because their I2C address is not modifiable. Thankfully, we foresaw
+this issue, so we dealt with it by purchasing an I2C multiplexer. Another issue
+is that in the current design of the code, after a measurement command, the
+program blocks while the measurement is being taken. This means the system
+could noticeably slow down if this part of the API is used in larger systems
+with more sensors. It currently is not a problem because the system does not
+have to be fast. Finally the Raspberry Pi wasn’t capable of delivering the
+required amount of power; this was resolved by powering them from the power
+supply directly.
+
 \subsection{Recommendations}
+We would recommend using sensors with programmable addresses because this would
+greatly simplify the cable harness and eliminate the need for a multiplexer.
 
 \section{CO2 sensors}
 \subsection{Hardware}
