@@ -1,0 +1,726 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[hidelinks]{hyperref}
+
+\usepackage{graphicx}
+\usepackage{titlepic}
+\usepackage{apacite}
+\usepackage{relsize}
+\usepackage{mhchem}
+\usepackage{eurosym}
+\usepackage{siunitx}
+\sisetup{load-configurations=abbreviations,product-units=single,per-mode=symbol}
+
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+
+\usepackage{color}
+\usepackage{listings}
+\lstset{language=C++,
+		numbers=left,
+		basicstyle=\ttfamily,
+		keywordstyle=\color{blue}\ttfamily,
+		stringstyle=\color{red}\ttfamily,
+		commentstyle=\color{green}\ttfamily,
+		morecomment=[l][\color{magenta}]{\#},
+		tabsize=2
+}
+
+%C plus plus
+\def\ifmonospace{\ifdim\fontdimen3\font=0pt }
+\def\Cpp{%
+\ifmonospace%
+    C++%
+\else%
+    C\kern-.1667em\raise.30ex\hbox{\smaller{++}}%
+\fi%
+\spacefactor1000 }
+%-----------------
+
+\pagestyle{plain}
+\begin{document}
+
+\frontmatter
+
+\title{Air Handling Unit}
+\author{Saliem Amirkhan -- 14045338 \and
+Thijs Bril -- 14044951 \and
+Richard Kokx -- 14139227 \and
+Tobi van Westerop -- 13019236}
+\date{\parbox{\linewidth}{\centering%
+Final report -- 21 June 2017 \endgraf
+\small
+Second revised version -- \today\endgraf\bigskip
+\normalsize
+\flushright
+The Hague University of Applied Sciences \endgraf
+Technische Informatica \endgraf
+TI-H-PR -- Bedrijfsproject
+}}
+\titlepic{\includegraphics[width=\textwidth]{images/titlepic.jpg}}
+
+\maketitle
+
+\chapter*{Summary}
+\addcontentsline{toc}{chapter}{Summary}
+Air handling units are complex machines. To help students understand them
+better, they need hands-on experience with a unit. However, real units are too
+large and too expensive for most schools, and simulations are not accurate
+enough. Therefore, we were tasked with designing, creating and programming a
+miniature prototype of an air handling unit. This unit had several requirements
+concerning temperature, humidity, and \ce{CO2} sensors, and actuators for air
+speed, heating, cooling, and humidity.
+
+We built a wooden case, we decided on a Raspberry Pi \cite{RaspberryPi}
+(hereafter often referred to as simply ``Raspberry'' or ``Pi'') as the
+controller, and wrote an API in \Cpp to communicate with the sensors and
+actuators. We are controlling the heating and cooling elements, the fans, and
+the servos for the vents using PWM. The temperature and humidity sensors are
+controlled using I2C, and communication with the \ce{CO2} sensors occurs using
+UART.
+
+To operate the air handling unit, and to create some example code, we built a
+control application with a web interface. This application can manually control
+the actuators and reads out all of the sensors. In the end, most of the
+requirements were successfully fulfilled.
+
+
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+Air handling units are complex machines with a lot of variables, all of which
+can have an influence on the way the system works. This makes it difficult for
+students to fully comprehend systems like these so that they are able to design
+and implement air handling units themselves. The problem with normal sized air
+handling units is that they are just too big. How can students experiment with
+it to get an understanding of how an air handling unit works? Currently, the
+only possible way is with simulators. But as with every simulator, there is the
+question if they are realistic enough. Are they applicable for students who
+want to learn how an air handling unit works? The answer is no. While they
+perform the basic functions, there are ways to make a room even hotter than the
+sun. This is of course not physically possible. That's why we were given the
+task to create a scaled down model of a normal sized air handling unit.
+Designing, building and coding the system to be working at the demonstration
+all need to be done within this assignment. 
+
+Designing the build was the first thing addressed during the project. During
+this stage research had to be done on what components would be used, which type
+of material to use and all the measurements had to be calculated. The decision
+of what parts or components to use was also based on the given requirements.
+The research on the components can be found in the "Hardware" sections of this
+report, and the requirements are available in Chapter \ref{ch:requirements}.
+
+Building the unit itself was done after research was finished. This task
+contained getting the resources, cutting them to the calculated measurements
+and assembling everything. More in-depth information on this subject can be
+found in Section \ref{sec:case} -- Case.
+
+At last the code had to be written for all the components. In the beginning all
+the components were tested separately of each other. This meant coding went per
+component. After coding all the components, everything was put together to make
+an complete API which we decided to complement with a control software to
+demonstrate the API in action. Information about this subject can be found in
+Chapter \ref{ch:software} - Software.
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+\mainmatter
+\chapter{Approach}
+In the beginning of the project, we decided on using Scrum \cite{scrum}. Scrum
+is a project methodology that would allow us to quickly get a working
+prototype, on which we could then apply improvements in fast iterations. It is
+also a methodology we have used before, which means we could get started
+quickly without having to learn new procedures.
+
+Our plan was to take the first three weeks as "Sprint 0", to formulate a plan
+of approach and get all requirements and plans figured out. This plan of
+approach can be found in Appendix \ref{app:plan-of-approach}, a short outline
+or our planning is given here.
+
+In the next sprint (sprint 1), we were going to start our research, and we were
+going to design our prototype. We were also going to start building the
+prototype. In sprint 2, the plan was to have finished our research. We also
+wanted to our prototype hardware complete. In this second sprint, we were also
+planning on starting on software development for the prototype. The plan then
+was to have a working prototype in sprint 3, at the assessment of the first
+half of the project.
+
+In sprints 4 through 7 (weeks 4.1 - 4.8), our plan was to elaborate the control
+program in two-week iterations. In the meantime, we were going to evaluate the
+hardware and improve it if necessary.
+
+
+\chapter{Requirements}
+\label{ch:requirements}
+In order to design the air handling unit and to make sure the choices made are
+in line with the desires of the client, clear requirements need to be defined.
+These requirements can be split into two types: functional requirements,
+defining the functions that the air handling unit must or should be able to
+carry out, and non-functional requirements, defining certain preconditions that
+the design should be compliant with.
+
+\section{Functional requirements}
+In essence, the function of an air handling unit is fairly simple, which is why
+there are not a lot of functional requirements. The air handling unit must be
+able to measure \ce{CO2} levels, humidity levels, and temperature. It must also
+be able to control those levels, using a variety of actuators. It should also
+be possible for users of the unit to readout the measured levels, and determine
+how the air handling unit responds to those measurements in order to control
+the actuators.
+
+In the first meeting with the client, he indicated he wanted a chamber size of
+approximately \SI{50x50x50}{\cm}. He also expressed the wish that the
+specifications of the mock-up unit should be similar to those of real air
+handling units. The desired chamber size leads to a volume of \SI{125}{\L}.
+During our excursion to Systemair %TODO
+, we discovered that an air handling unit is
+supposed to refresh all of the air in the building three times per hour.
+Plugging in those numbers leads to an airflow of \SI{375}{\L\per\hour}, or
+\SI{104.2}{\cm\cubed\per\s}. To simulate an air handling unit in Dutch weather,
+we looked at data from the KNMI (Royal Dutch Weather Institute), which showed
+the lowest average minimum temperature in February is \SI{-1.0}{\celsius}
+\cite{knmi-min-feb}, and the highest average maximum temperature in August is
+\SI{24.0}{\celsius} \cite{knmi-max-aug}. To take some margins into account, we
+assumed an intake air temperature between \SI{-10}{\celsius} and
+\SI{30}{\celsius} four our calculations. We also assumed a desired room
+temperature between \SI{18}{\celsius} and \SI{25}{\celsius}.  The relative
+humidity should ideally be between 50\% and 60\%, but anywhere between 30\% and
+70\% is acceptable.  The relative humidity of the intake air (assuming the
+Dutch climate) can be anywhere between 20\% and 100\% \cite{knmi-relh}.  The
+temperature and relative humidity are within these ranges in many parts of the
+world, so designing the air handling unit according to these criteria should
+mean it can be used by students worldwide.
+
+\section{Non-functional requirements}
+Because of the specific purpose of this mock-up air handling unit, there are
+many more non-functional requirements, which are in some cases more important
+than the functional requirements in making certain decisions. First, the air
+handling unit must be built out of materials that are easily available to any
+technical educational institution anywhere in the world, so that anyone needing
+to instruct students on the workings of an air handling unit can build a
+mock-up similar to ours. This also means the cost of the materials needs to as
+low as possible. Building the air handling unit should also be very simple.
+
+\chapter{Components}
+
+\section{Controller}
+\subsection{Hardware}
+For the controller, we considered five options: a Raspberry Pi
+\cite{RaspberryPi}, a single-board PC from a different manufacturer
+\cite{BananaPi}, an Arduino \cite{Arduino}, a microcontroller chip with our own
+circuits around them \cite{AtMega}, or a fully fletched desktop. Each of these
+options had their own advantages and disadvantages. A Raspberry Pi has the
+advantages of being widely available and easily programmable. It also easily
+supports a screen, and has built-in support for the protocols of the available
+sensors. It also has WiFi and Bluetooth on board. The disadvantages are that
+the input/output ports function at \SI{3.3}{\volt}, and have a very limited
+power delivery.
+
+The single-board PC from a different manufacturer is very similar to the
+Raspberry Pi, except that it can deliver more power. However, it is twice as
+expensive as the Raspberry Pi, and it is less well known, which means that it
+isn't as widely available and has less of a support community.
+
+The Arduino has the advantages of being a highly adaptable, low-power board,
+which functions completely at \SI{5}{\volt} logic levels. It also has a lot of
+input/output pins, and is widely available worldwide. The disadvantages are
+that it requires a computer to program it, and that loading programs onto the
+Arduino can be a little complicated and prone to errors. It is also not
+possible to connect anything but a very simple LED display to an Arduino.
+
+A microcontroller in a home-made circuit is in essence very similar to an
+Arduino, except that it is a lot cheaper. This price difference comes with a
+tradeoff, namely that it requires a lot of time and effort to develop the
+circuit. The home-made circuit also makes the system harder to reproduce than
+when using any other controller.
+
+The last option we looked into was a fully fletched desktop computer. The price
+of such a system can vary a lot, but it is more expensive than any of the other
+choices. The advantages are that a desktop computer is powerful,
+multifunctional and easily programmable. The disadvantages are that a desktop
+computer does not have any real input/output ports, which makes it a lot harder
+to interact with sensors and actuators, and that it is too expensive.
+
+After weighing all the advantages and disadvantages, we decided that using a
+Raspberry will be the best option for this project, because of the easy
+reproducibility, the relatively low  costs, and the easily accessible
+input/output ports. As a added bonus we can display a monitoring UI on the
+supported hdmi interface which shows a real time representation of the unit
+
+The controller unit is installed to the right of the intake tube of the air
+handling unit. Next to the two breadboards which is where all the cables from
+the sensors and actuator are combined and eventually are connected to the
+Raspberry Pi. The setup for the demo is using a consumer wireless solution to
+create a local network for the Raspberry Pi and developers PCs. The router is
+setup with a static DHCP lease for the Raspberry Pi MAC address for easy
+connection even when we switch to a different setup. Power is delivered through
+a standard 2 Amp Micro-USB wall adapter. This could however be changed too feed
+directly from the power supply but for the demo setup is was preferred to
+separate the two so that in the case of an overload or other incident we could
+turn off the power supply without shutting down the Raspberry Pi.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{images/casebuilt.jpg}
+\caption{A picture of the case in-progress, with the Raspberry Pi installed.}
+\label{fig:case}
+\end{figure}
+
+\subsection{Software}
+The Raspberry Pi is running Raspbian Jessie Lite\footnote{Raspbian
+\cite{Raspbian} is the official supported operating system for the Raspberry
+Pi, based on the Debian Linux distribution \cite{Debian}. Jessie is the
+previous version of Raspbian, the most recent version (``Stretch'') was
+released in the summer of 2017. The ``Lite'' version does not include a desktop
+environment.} which due to being a Linux distribution is easy to administer
+over an SSH connection from one of the development PCs. Code is imported to
+the Pi via Git\footnote{Git is a distributed version control system, originally
+created for the development of the Linux kernel \cite{Git}}. If one of the
+developers pushes a new version it is pulled to the Pi and compiled through a
+custom makefile which first compiles the API (if necessary) to object files.
+Next, it compiles the main controller program, and finally it links all object
+files together into a single executable.
+
+\subsection{Problems}
+While setting up the Raspberry Pi we encountered a couple problems. During our
+first setup of Raspbian we used a cheap poor quality SD card which resulted in
+agonisingly slow install and update times. This was however resolved when we
+received the 16GB Class 10 SD card. Class 10 means the card has a minimal
+sequential writing speed of 10MB/s, as well as having a higher reading speed
+than the cheap SD card we used earlier. The other problem we ran into was with
+the ip address since we did not install a monitor and we did not have any way
+to check what ip address got assigned by the router. We fixed this by using our
+own router with a static DHCP binding.
+
+\subsection{Recommendations}
+We would recommend using a high quality SD card class 10 or similar. We also
+recommend implementing a way to power the Raspberry Pi from the power supply,
+while keeping it separate from the rest of the components, to be able to shut
+down the components without powering off the Raspberry Pi.
+
+\section{Case}
+\label{sec:case}
+\subsection{Hardware}
+For the building materials the choice came down to three choices: metal, wood
+and plastic. 
+
+\begin{table}[]
+\centering
+\makebox[\textwidth][c]{
+\begin{tabular}{llll}
+              & \textbf{Metal}                      & \textbf{Wood} & \textbf{Plastic}         \\ \hline
+Advantages    & Very sturdy                         & Not affected by temperature   & Lightweight              \\
+              & Strong while thin                   & Easy to shape                 & Cheap                    \\
+              & Medium availability                 & Cheap                         & Relatively easy to shape \\
+              &                                     & Easy to mount together        &                          \\
+              &                                     & Easy to replace a small piece &                          \\
+              &                                     & High availability             &                          \\ \hline
+Disadvantages & Affected by temperature             & Affected by water             & Hard to mount together   \\
+              & Hard to shape                       & Not as sturdy as metal        & Affected by temperature  \\
+              & Chance of electrical short-circuits &                               & Low availability         \\
+              & As TI hard to weld together         &                               &                         
+\end{tabular}
+}
+\caption{Comparison of materials}
+\label{tab:materials}
+\end{table}
+
+With the considerations, given in Table \ref{tab:materials}, we went for wood.
+Wood is the easiest to adjust and has a high availability, so later on it will
+be easy for other students to replicate it, as stated in the non-functional
+requirements. Of course it's possible to create the mock-up with metal or
+plastic, but for our timespan, skills and the assignment requirements wood was
+the best choice.
+
+While buying the wood plate and while holding it we concluded that the
+\SI{4}{\mm} plate would not be enough for the case. So we decided to go with a
+double thickness and bought a \SI{9}{\mm} thick plywood plate. We first started
+cutting the one \SI{244x122}{\cm} hardwood plywood plate in sections as
+outlined in our design. After that we cut out a piece of \SI{35x35}{\cm}
+perspex for the window. Then we started to assembly of the case this took
+considerable amount of time. During this time we decided to go with modular
+setup so that we could easily change the wiring and install additional
+compartment walls. After completing the main chamber and fixing some off the
+measuring flaws, we needed to cut of some edges which were forgotten to be
+taken into account, we started on the first tube. This intake tube will be
+housing for all of the actuators and most of the sensors. Due to this fact we
+made the top of this part slidable so we could reach in and place/replace
+components. The same is true for tunnel connecting it to the upper tube. Too
+support this tube and since there is no complete interconnect we installed some
+support beams to support the upper tube. We then finished the case by
+installing the upper tube.
+
+\subsection{Problems}
+We ran into a amount of problems the first being was easily fixed but worth
+noting. While buying the stock wood plate we had the plate cut at the store but
+due to a mistake from the store clerk we ended up with wrong size pieces.
+After some complaining with the store we got replacement parts so we ended up
+with extra pieces. This ended up helping later with our next problem while we
+were building the case we ended up missing a couple mm on either side of the
+tube walls this was due to the original design being meant for \SI{4}{\mm}
+thick wood but we went with \SI{9}{\mm} because we found that \SI{4}{\mm} would
+not be structurally sound enough. Another problem we ran into while
+constructing the case was because a \SI{9}{\mm} sheet is still rather thin the
+nails would split the plywood to fix this we used small wood strips this also
+helped with the modular approach we went with because now we could support the
+top piece of the tubes on the strips without nailing them too the rest of the
+case.
+
+\subsection{Recommendations}
+We would recommend that future prototypes use even thicker material or use
+better support strips this would also allow for almost complete use of screws
+instead of nails this would make taking the case apart for changes easier as
+well as making the case more rigid and stronger overall. If you would use
+materials that are more than \SI{2}{\cm} thick you could even forgo the use of
+support material what would give the case a more aesthetically pleasing look
+and more place for cables and components. Also to complete the case when all
+the components are installed we would recommend using silicon sealant to make
+the case airtight and to make the whole case airtight we recommend using a
+rubber ring and a pressure locking mechanisms to seal the top of the main
+chamber. Another recommendation would be to implement an efficient cable
+management route instead of bent over nails.
+
+\section{Heating elements}
+\subsection{Hardware}
+To calculate the power requirements of the heating elements, we will assume the
+worst-case scenario, whereby the intake temperature is \SI{-10}{\celsius}, and
+the desired temperature of the air in the chamber is \SI{25}{\celsius}. Using a Mollier
+diagram (see Figure \ref{fig:mollier}), we can figure out how much energy this needs. The
+vertical axis is the temperature of the air in \si{\celsius}, the horizontal axis is the
+absolute humidity in kg water per kg air. The curved lines are lines of equal
+relative humidity, while the diagonal lines are the amount of energy in a kg of
+air, relative to the chosen origin of \SI{0}{\celsius} without any humidity.
+
+Heating up air means moving straight up in the diagram, because the temperature
+changes without affecting the absolute humidity. This means if we heat the air
+up from \SI{-10}{\celsius} to \SI{25}{\celsius} at zero humidity, we need to go
+from \SI{-10}{\J\per\kg} to \SI{25}{\J\per\kg}, adding \SI{35}{\J\per\kg}. If
+we start at 100\% humidity, we start at \SI{-6}{\J\per\kg} and go to
+\SI{29}{\J\per\kg}, so we are also adding \SI{35}{\J\per\kg}. In Chapter
+\ref{ch:requirements}, we calculated that the air needs to be flowing at
+\SI{104.2}{\cm\cubed\per\s}. The density of air is \SI{1.225}{\kg\per\m\cubed},
+so we will need to heat up about \SI{1.28e-4}{\kg\per\s}, which (plugging in
+the \SI{35}{\J\per\kg}) requires approximately \SI{0.00447}{\J\per\s}, or about
+\SI{4.47}{\milli\W}. However, if we use the airflow as described in Section
+\ref{sec:fans} of \SI{140.3}{\m\cubed\per\hour}, we get
+\SI{38,972}{\cm\cubed\per\s}, or \SI{0.0477}{\kg\per\s}, which means we need
+about \SI{1.67}{\W}. However, this power requirement does not contain any power
+needed to compensate for the cooling element. As visible in Section
+\ref{sec:cooling}, the cooling element will cool the air no more than
+\SI{25}{\celsius}, which means the calculated \SI{1.67}{\W} is at least half of
+the total power required. This means that (factoring in some margins) a total
+heating power of at least \SI{5}{\W} should be enough for our purposes. Because
+our design uses two heating elements, the required power rating of each heating
+element is \SI{2.5}{\W}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{images/mollier.png}
+\caption{Mollier diagram. \protect\cite{mollier}}
+\label{fig:mollier}
+\end{figure}
+
+For the heating elements, we had a choice out of several possibilities. In
+regular-sized air handling units, air is heated using hot water, which usually
+comes from a gas-burning heater. However, due to the complexity of a design
+using hot water, we had been given the task of finding a purely electrical
+heater. Electrical heating elements are practically all based on a resistance
+wire, which heats up if a current flows through it. The differences between the
+elements come from the length and width of the wire (which determine voltage
+and power requirements), and from the type of the element the wire is embedded
+in. For the type of the element, we found three widely available options: a
+tube-shaped element with slats, a ceramic element, or a resistance wire without
+an element around it. Each of these options has its own advantages and
+disadvantages.
+
+The tube-shaped element as visible in Figure \ref{fig:tube-heating} is
+specially designed to heat air, and it's a standard element that's easy to
+connect. The disadvantages are that tube-shaped elements are all rated at 230V,
+which means we will need a powerful relais switch. There also isn't a wide
+range of power available. A last and critical disadvantage is that the shortest
+tube-shaped elements have a minimum length of \SI{200}{\mm}, while for our
+design the maximum length of the heating element is \SI{150}{mm}. This means
+there is no way to fit a tube-shaped element into the air handling unit.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{images/tube-heater.jpg}
+\caption{Tube-shaped heating elements. \protect\cite{tube-heater}}
+\label{fig:tube-heating}
+\end{figure}
+
+The ceramic elements have several advantages: they are available in a wide
+variety of sizes and shapes, have a large range of possible power ratings, and
+are available both in \SI{230}{\V} and \SI{12}{\V} versions. The main
+disadvantage is that the only ceramic element available at Conrad, pictured in
+Figure \ref{fig:ceramic-heating}, is smaller than we would like it to be. This
+element is \SI{90x27x17}{\mm}, which means we will have to figure out a way to
+prevent the air from flowing around it instead of through the element.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{images/ceramic-heater.jpg}
+\caption{Tube-shaped heating elements. \protect\cite{ceramic-heater}}
+\label{fig:ceramic-heating}
+\end{figure}
+
+Lastly, there is the option to purchase a spool of resistance wire, as pictured
+in Figure \ref{fig:wire-heating}. The advantage is that we can choose the length of the
+resistance wire, which means any combination of power, voltage and amperage is
+possible. However, this advantage does not weigh up against the disadvantages:
+if we use a resistance wire, we have to build a system to transfer the energy
+efficiently to the air, while at the same time preventing short circuits or
+electric shocks. There is also a chance that the resistance wire gets very hot
+in certain places, which has a non-negligible risk of fire.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{images/wire-heater.jpg}
+\caption{Tube-shaped heating elements. \protect\cite{wire-heater}}
+\label{fig:wire-heating}
+\end{figure}
+
+In conclusion, we decided that a resistance wire would be too difficult to
+implement safely, because of the risks of electric shocks or fire. It also
+would not fit with the idea of an air handling unit mock-up that is easily
+built by others. The choice was now between the tube-shaped element or the
+ceramic element. Because of the tube-shaped elements are only available
+starting at \SI{200}{\mm}, we decided on using a ceramic element, because it
+fits better in our design. The only ceramic heating element that would not have
+to be shipped overseas (thus requiring too long of a delivery time) was the
+small \SI{150}{\W} element mentioned earlier. This element can deliver more
+power than we need, but this mainly means it will not have to be switched on
+continuously.
+
+This element when it was received tested and we observed that it heats up
+incredibly fast. However we were using simple underpowered transistors, which
+heated up and failed very fast. During this time we decided to wire up the
+heating elements and place them in the case and order mosfets that would be
+able to withstand the immense current required for the heating elements.
+However, these have not been delivered yet and could not be installed for this
+reason.
+
+\subsection{Software}
+To accurately control the heating elements, we are using a PWM signal to
+rapidly turn a transistor on and off. To do this, we created the PWM class,
+which we will explain first. This class implements the iCommunication
+interface, so it has the standard \lstinline|Initialize()|, \lstinline|Read()|
+and \lstinline|Write()| functions (lines 6, 8, 9 in Listing
+\ref{lst:pwm-class}). The \lstinline|Read()| function is empty on purpose,
+because it is not possible to read from a PWM pin. Due to the specifics of the
+softPwm API of the WiringPi library, we need a more sophisticated Initialize
+function which receives a list of pins that will be used for PWM signals.
+Therefore, the standard \lstinline|Initialize()| function will always return
+false.
+
+\lstinputlisting{code/pwm-class.h}
+
+The \lstinline|Initialize()| function receives an array of GPIO pins that will
+be used for PWM signals. All of these are initialized with the
+\lstinline|softPwmCreate()| function.  This function also requires an initial
+value and a maximum value. In our case, we always set the initial value to 0 to
+make sure the pin is turned off. The maximum value is always set to 100, which
+means we can set the pin to anywhere between 0 and 100.
+
+\lstinputlisting{code/pwm-initialize.cpp}
+
+The \lstinline|Write()| function only requires a data value and an address. All
+it does is call the \lstinline|softPwmWrite| function. Since this function has
+no error checking, we can not detect whether or not the call has succeeded.
+
+\lstinputlisting{code/pwm-write.cpp}
+
+The heating element class, HeatingElement, is relatively simple, and inherits
+from the iActuator class. Its most important function is
+\lstinline|SetValue()|. This function first limits the value to within an
+acceptable range, and then calls the \lstinline|SetValue()| function of the
+parent class. The acceptable range for the heating elements is between 0 and
+30, because that ensures the transistors do not get too hot.
+
+\lstinputlisting{code/heating-setvalue.cpp}
+
+The \lstinline|SetValue()| function of the iActuator class is very simple. All
+it does is call the \lstinline|Write()| function of the Communication member.
+
+\lstinputlisting{code/iactuator-setvalue.cpp}
+
+\subsection{Problems}
+As alluded to in the hardware sections of the heating element the problem we
+ran into with the heating element was not the heating element but rather the
+hardware required to control the power of the element. We used TIP120
+transistors but these are only rated for \SI{5}{\ampere} \cite{Transistor}
+Since our heating elements each pull more than \SI{5}{\ampere} \cite{Heating}
+the transistor heated up and melted. After this we did not use the transistors
+to control the heating element anymore and tested the api software using a
+voltmeter. 
+
+\subsection{Recommendations}
+We would recommend using a mosfet like FQP30N06L. These are rated for up to
+\SI{32}{\ampere} \cite{FQP30N06L}, this will be more than enough to handle the
+heating elements. However this only covers a very simple use case and to safely
+and efficiently implement this we would recommend someone with the required
+knowledge of electronics  to design an analog circuit which can handle the high
+frequency pwm without potentially breaking the power supply and maybe even
+separate the elements completely from the Raspberry Pi.   
+
+\section{Cooling element}
+\label{sec:cooling}
+
+\subsection{Hardware}
+The cooling element in a regular air handling unit is based on
+vapor-compression, but due to the size of this solution it is not applicable on
+this small-scale model. As a replacement of the vapor-compression based cooling
+element we choose to go with a Peltier-element, which cools based on
+thermoelectric cooling. The pros for us are the size, prize and the fact there
+are no moving parts. The cooling element is not only used to reduce the
+temperature of the room it is aswell used to reduce the humidity in the air and
+that is where the cooling potential of the element comes in.If we take the
+worst case scenario of 100\% humidity to 20\% humidity as stated in the
+requirements we need to cool the air down from \SI{25}{\celsius} to
+\SI{5}{\celsius}. So we need atleast a temperature difference of maximum
+outside temperature as in the requirements specified minus \SI{5}{\celsius} for
+the humidity to get to the minimum humidity. This results in a total
+\SI{25}{\celsius} temperature difference.
+
+\begin{table}[]
+\centering
+\makebox[\textwidth][c]{
+\begin{tabular}{l|ll}
+Category               & Hightech Peltier element & Hightech Peltier element \\ \hline
+Type                   & QC-127-1.4-8.5MD         & QC-241-1.0-3.9M          \\
+Rated Voltage          & \SI{15.5}{\V}            & \SI{29.5}{\V}            \\
+Max. current           & \SI{8.5}{\A}             & \SI{3.9}{\A}             \\
+Wattage (max.)         & \SI{72}{\W}              & \SI{64}{\W}              \\
+Temperature difference & \SI{71}{\K}              & \SI{71}{\K}              \\
+Sizes                  & \SI{40x40x3.4}{\mm}      & \SI{40x40x3.6}{\mm}      \\
+Price                  & \euro 43,54              & \euro 61,01                 
+\end{tabular}
+}
+\caption{Comparison of materials}
+\label{tab:peltier}
+\end{table}
+
+Table \ref{tab:peltier} shows a variety of Peltier elements. We chose to go
+with the lower voltage one to be compliant with the power requirements of other
+components. Both of the elements are in the range of the temperature difference
+specified in the above part.
+
+Our chamber is pretty small so we don't need a huge cooling surface, but we
+wanted to place a cooling element on the cold side of the element to help with
+the disperse of the cold. This heatsink however has not been installed yet both
+due to not having been bought. Also during the testing of the element we found
+out that because the device transfers heat from one of its sides too the other
+there will have to be another heatsink with fan to dissipate the heat. These
+however also haven't been bought yet and so have not been installed yet. Wiring
+has been done but due to the fact the heat can't be dissipated right now we
+can't run the element for long periods of time.
+
+\subsection{Software}
+The code for the cooling element is completely identical to that of the heating
+elements. It also uses the PWM class, and its \lstinline|SetValue()| function
+also limits the value to the 0-30 range before calling the parent class
+\lstinline|SetValue()| function.
+
+\subsection{Problems}
+We ran into two problems with our cooling element, the first being the same as
+with the heating element. The cooling element also draws too much power which
+overloads the transistor. The other problem was that in order to function the
+element needs to dissipate the heat it extracts from the cold side on the hot
+side. But since we did not know this during our design phase this wasn’t
+included in the design. To compensate for this we needed to cut a hole in the
+top of the lit of the intake tube. This would give space to install a heatsink
+and maybe a fan. But again due to this item not being able to be bought in time
+this hasn't been installed yet.
+
+\subsection{Recommendations}
+The same recommendation as for the heating element stands, we recommend using a
+mosfet that supports the amperage required for the cooling element.
+Additionally we recommend looking into other methods of cooling because while
+this approach will work but the heat will be dissipated in close vicinity of
+the intake which may interfere with the process.
+
+\section{Temperature and humidity sensors}
+\subsection{Hardware}
+When researching the temperature and humidity sensors, our original plan was to
+have separate temperature sensors and humidity sensors. However, it turned out
+that almost all humidity sensors can also report the temperature, so in the end
+we decided to use combined temperature/humidity sensors. For the sake of
+completeness, our original research into temperature-only sensors is also
+described here.
+
+\subsubsection{Temperature-only sensors}
+Beginning the research process, all components were researched separate of each
+other. That's why the temperature sensors were also researched as
+temperature-only sensors. While there are hundreds of sensors that read the
+temperature, within this research there were a couple of options. Each option
+doing the same thing but with different maximum temperature readings,
+connection types or just costs. One however stood out because of the way it
+communicated with a controller. It was the DS18B20. The way this sensor
+communicates with the controller is by a 1-wire interface and an unique
+identifier. This meant that there could be multiple sensors connected to a
+single interface on the controller where every sensor is reached by its
+identifier. As the ports on the controller were limited for the project's
+needs, this was the sensor of choice. This sensor also met all the other
+requirements. For example, it can read temperatures from \SI{-55}{\celsius} to
+\SI{+125}{\celsius}. This was more than enough looking at the functional
+requirements in Chapter \ref{ch:requirements}, where it is stated that we will
+be measuring temperatures from \SI{-10}{\celsius} to \SI{+30}{\celsius}.
+However since there are sensors where the temperature and humidity sensors are
+combined, it was decided that buying one sensor with two operations is the way
+to go. Another reason for going with this decision was because of the physical
+layout, the temperature sensor would sit next to a humidity sensor at all
+times.
+
+\subsubsection{Combined temperature and humidity sensors}
+%TODO hier verder
+\subsection{Software}
+\subsection{Problems}
+\subsection{Recommendations}
+
+\section{CO2 sensors}
+\subsection{Hardware}
+\subsection{Software}
+\subsection{Problems}
+\subsection{Recommendations}
+
+\section{Fans}
+\label{sec:fans}
+\subsection{Hardware}
+\subsection{Software}
+\subsection{Problems}
+\subsection{Recommendations}
+
+\section{Vents}
+\subsection{Hardware}
+\subsection{Software}
+\subsection{Problems}
+\subsection{Recommendations}
+
+\section{Power supply}
+\subsection{Hardware}
+\subsection{Software}
+\subsection{Problems}
+\subsection{Recommendations}
+
+\chapter{Software}
+\label{ch:software}
+\section{API}
+\section{Control software}
+\section{Webdesign}
+
+\chapter{Conclusion}
+\chapter{Evaluation and reflection}
+\chapter{Bibliography}
+\bibliographystyle{apacite}
+\bibliography{bibliography.bib}
+
+\appendix
+\chapter{API Design}
+\chapter{Control Software}
+\chapter{Manual Control}
+\chapter{Plan of Approach}
+\label{app:plan-of-approach}
+\chapter{API Code tutorial}
+\chapter{Case tutorial}
+\chapter{API Code documentation}
+
+\end{document}
