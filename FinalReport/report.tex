@@ -8,7 +8,12 @@
 \usepackage{mhchem}
 \usepackage{eurosym}
 \usepackage{siunitx}
-\sisetup{load-configurations=abbreviations,product-units=single,per-mode=symbol}
+\sisetup{load-configurations=abbreviations,
+		product-units=single,
+		per-mode=symbol,
+		range-phrase=--,
+		range-units=single,
+}
 
 \usepackage{chngcntr}
 \counterwithout{figure}{chapter}
@@ -506,13 +511,12 @@ To accurately control the heating elements, we are using a PWM signal to
 rapidly turn a transistor on and off. To do this, we created the PWM class,
 which we will explain first. This class implements the iCommunication
 interface, so it has the standard \lstinline|Initialize()|, \lstinline|Read()|
-and \lstinline|Write()| functions (lines 6, 8, 9 in Listing
-\ref{lst:pwm-class}). The \lstinline|Read()| function is empty on purpose,
-because it is not possible to read from a PWM pin. Due to the specifics of the
-softPwm API of the WiringPi library, we need a more sophisticated Initialize
-function which receives a list of pins that will be used for PWM signals.
-Therefore, the standard \lstinline|Initialize()| function will always return
-false.
+and \lstinline|Write()| functions (lines 6, 8, 9). The \lstinline|Read()|
+function is empty on purpose, because it is not possible to read from a PWM
+pin. Due to the specifics of the softPwm API of the WiringPi library, we need a
+more sophisticated Initialize function which receives a list of pins that will
+be used for PWM signals.  Therefore, the standard \lstinline|Initialize()|
+function will always return false.
 
 \lstinputlisting{code/pwm-class.h}
 
@@ -627,7 +631,7 @@ We ran into two problems with our cooling element, the first being the same as
 with the heating element. The cooling element also draws too much power which
 overloads the transistor. The other problem was that in order to function the
 element needs to dissipate the heat it extracts from the cold side on the hot
-side. But since we did not know this during our design phase this wasn’t
+side. But since we did not know this during our design phase this wasn't
 included in the design. To compensate for this we needed to cut a hole in the
 top of the lit of the intake tube. This would give space to install a heatsink
 and maybe a fan. But again due to this item not being able to be bought in time
@@ -717,7 +721,8 @@ Humidity uncertainty & \SI{\pm2}{\percent}    & \SI{\pm2}{\percent}    & \SI{\pm
 Price                & \euro 2,52             & \$14.95                & \$6.95                & \$13.95
 \end{tabular}
 %}
-\caption{Comparison of temperature and humidity sensors} %todo cite 4 datasheets
+\caption{Comparison of temperature and humidity sensors \protect\cite{HDC1010}
+\protect\cite{HTU21D} \protect\cite{Si7021} \protect\cite{SHT31-D}}
 \label{tab:humidity}
 \end{table}
 
@@ -753,7 +758,7 @@ The temperature is measured in a very similar manner. There are two
 differences: we write byte 0xE0 ("Read Temperature Value from Previous RH
 Measurement") instead of 0xF5, and the formula for calculating the temperature
 is \lstinline|double temperature = (175.72*result) / 65536 - 46.85| (Si7021
-Datasheet, §5.1.2)
+Datasheet, \S5.1.2)
 
 \subsubsection{Multiplexer}
 Because all the Si7021 chips use the same I2C address, they can not be
@@ -819,7 +824,7 @@ is that in the current design of the code, after a measurement command, the
 program blocks while the measurement is being taken. This means the system
 could noticeably slow down if this part of the API is used in larger systems
 with more sensors. It currently is not a problem because the system does not
-have to be fast. Finally the Raspberry Pi wasn’t capable of delivering the
+have to be fast. Finally the Raspberry Pi wasn't capable of delivering the
 required amount of power; this was resolved by powering them from the power
 supply directly.
 
@@ -827,17 +832,244 @@ supply directly.
 We would recommend using sensors with programmable addresses because this would
 greatly simplify the cable harness and eliminate the need for a multiplexer.
 
-\section{CO2 sensors}
+\section{\ce{CO2} sensors}
 \subsection{Hardware}
+The \ce{CO2} sensors are needed to measure how much fresh air the unit needs to
+take in to control the \ce{CO2} level in the room.  There are several options
+to measure the \ce{CO2}, one of which is the NDIR-type sensor. NDIR stands for
+non-dispersive infrared, which is a principle to detect the existence of
+\ce{CO2} in the air. The benefit of an NDIR sensor is that an NDIR sensor
+already has a built-in heating element, which is necessary for measuring the
+\ce{CO2} levels. If we go for a non-NDIR sensor, we also have to provide an
+external heating source to measure the \ce{CO2} level. By choosing an NDIR
+sensor we don't need an extra heating element, therefore the controls of the
+\ce{CO2} sensor are simpler than with a non-NDIR sensor where you have to
+control the sensor and the external heating element. This makes it easier for
+the students who are going to work with the air handling unit to get a general
+overview of the unit, without having to delve into the details of the \ce{CO2}
+sensor. It also makes it easier for them to change the sensor for another model
+if they have little programming skills. That's why we chose an NDIR-type
+\ce{CO2} sensor.
+
+For our purposes, mentioned earlier,  we decided to use an MH series \ce{CO2}
+sensor. The MH series has small sensor who could fit easily in the unit and
+they are relatively cheap for an NDIR \ce{CO2} sensor. Therefore the choice
+came down to two sensors, the MH-Z14a and the MH-Z19, which are compared in
+Table \ref{tab:co2}.
+
+\begin{table}[]
+\centering
+\makebox[\textwidth][c]{
+\begin{tabular}{l|ll}
+                    & MH-Z14a                                    & MH-Z19                      \\ \hline
+Working voltage     & \SIrange{4.5}{5.5}{\volt}                  & \SIrange{4.5}{5.5}{\volt}   \\
+Average current     & \SI{<60}{\milli\A}                         & \SI{<85}{\milli\A}          \\
+Interface Level     & \SI{3.3}{\volt} (\SI{5}{\volt} compatible) & \SI{3.3}{\volt}             \\
+Measuring range     & \SIrange{0}{10000}{ppm}                    & \SIrange{0}{5000}{ppm}      \\
+Output signal       & PWM                                        & PWM                         \\
+                    & UART                                       & UART                        \\
+					& Analog voltage signal                      & Analog voltage signal       \\
+Preheat time        & 3 min                                      & 3 min                       \\
+Working temperature & \SIrange{0}{50}{\celsius}                  & \SIrange{0}{50}{\celsius}   \\
+Working humidity    & \SIrange{0}{90}{\percent RH}               & \SIrange{0}{90}{\percent RH}\\
+Dimension (LxWxH)   & \SI{57.5x34.7x14.6}{\mm}                   & \SI{57.5x34.7x16}{\mm}
+\end{tabular}
+}
+\caption{Comparison of \ce{CO2} sensors \protect\cite{mh-z14a} \protect\cite{mh-z19}}
+\label{tab:co2}
+\end{table}
+
+The working temperatures of both sensors don't go as far as the
+\SI{-10}{\celsius} described
+in the function requirements, but this applies to all the sensors in our price
+range. If we go for a \ce{CO2} sensor that is capable of working in
+\SI{-10}{\celsius} and has a
+good availability, the price would be about ten times higher as the price is
+now. For that reason we went for a sensor with a working temperature that only
+goes to \SI{0}{\celsius}, but is affordable and fits inside the budget.
+
+The MH-Z14a has a measuring range from 0 to 10000 ppm (parts per million).
+Legally the maximum allowed \ce{CO2} value is 1000 ppm in the Netherlands
+\cite{bouwbesluit}. Knowing this, the measuring range of the MH-Z19, which is 0
+to 5000 ppm, will be more than enough. Furthermore, it is going to be difficult
+to reach a \ce{CO2} value higher than 5000 ppm in our mock-up.
+
+Therefore the choice went to the MH-Z19 NDIR sensor, as depicted in Figure
+\ref{fig:mh-z19}. The functionality is as good as the MH-Z14a, while the
+MH-Z19 is a bit cheaper, fits better in our design and has a better
+availability.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{images/co2.jpg}
+\caption{MH-Z19 \ce{CO2} sensor \protect\cite{mh-z19}}
+\label{fig:mh-z19}
+\end{figure}
+
+We decided to use the UART communication capabilities of the MH-Z19. This
+immediately presented a problem as the Raspberry Pi only has one UART
+interface, and since the sensor address is hardwired in the sensor, we needed
+to find a solution. By wiring the transmit pin to both sensors and the receive
+wires to different pins on the Raspberry Pi we could distinguish between the
+two sensors. These wires were also incorporated into the cable harness but due
+to them working on \SI{5}{\volt} instead of the \SI{3.3}{\volt} on which the
+I2C works they needed a different power line. 
+
 \subsection{Software}
+The chosen hardware, MH-Z19, has 2 manners of sending data to the Raspberry Pi.
+The first being a PWM signal and the second being UART. After researching the
+possibilities we decided on working with UART. This way of communicating is in
+this case only used for the \ce{CO2} sensors. 
+
+\subsubsection{Serial}
+To get serial communication working on a Raspberry Pi which is running Linux, a
+few values need to be changed within the OS its files. These values keep the
+serial port occupied for the OS itself, which in our case is not good as we
+need that port to communicate. These values have to be changed by calling the
+\lstinline|raspi-config| and disabling serial communication for the OS. Another
+change has to be done in the file \lstinline|/boot/cmdline.txt| where the
+specified port name is set to the OS it's communication, which in our case
+again needs to be released.
+
+After doing this the port is open to use and will work with any code. The
+initialization for serial is seen below:
+
+\lstinputlisting{code/serial-initialize.cpp}
+
+Line 3 opens the serial port with line 4 to 7 being its error handling. Line 9
+to 16 contain the settings that are used for the serial communication, for
+example \lstinline|baudrate = 9600| and no parity.
+
+Besides this the Serial class has two other functions, The \lstinline|Read()|
+and \lstinline|Write()| functions. While the only main function for using
+serial for the \ce{CO2} sensor is reading the value, you have to write to the sensor
+to give it a signal to start a measurement.
+
+The write function can be seen below:
+
+\lstinputlisting{code/serial-write.cpp}
+
+Line 6 to 15 define the array that is sent to the \ce{CO2} signal to trigger it to
+start the measurement, this array is predefined by the makers of the MH-Z19 and
+can be traced back to its datasheet \cite{mh-z19}. This is hardcoded within the
+write function because this was just not taken into account. At the time of
+coding the code was written with the array hardcoded for testing reasons and
+speed up the process of getting everything working. Line 19 is where the data
+is sent to the sensor with line 20 to 25 being its error handling.
+
+The read code:
+
+\lstinputlisting{code/serial-read.cpp}
+
+The main code of this function is put in a while because the port needs to be
+open for data reading. Whenever the data is read once, the while loop stops and
+the function carries on. The main read of data is done on line 10, after which
+the \ce{CO2} specific decoding is done and the global variables are set.
+
+\subsubsection{Sensors}
+The \ce{CO2} sensors have a specific class as well. This class is for the component
+management and is used to handle the received data. As a class itself this
+isn't the most complicated class because a part of the handling is done by the
+serial class. 
+
+The main function of the class, \lstinline|getValue()| can be seen below:
+
+\lstinputlisting{code/co2-getvalue.cpp}
+
+The function simply calls the \lstinline|Write()| function of the communication
+class followed by a \lstinline|Read()| call. The value that comes out of this
+is then recalculated to the exact format, ppm in this case and then returned to
+be stored by the Controller class. The way the ppm has to be calculated is also
+specified in the datasheet \cite{mh-z19}.
+
 \subsection{Problems}
+If using multiple CO2 sensors there is a problem. The ID's of the sensors can't
+be changed so the identification of multiple sensors is difficult to do when
+they are all connected to the same serial port. A solution for this problem is
+using a multiplexer or using a different GPIO pin for each sensor, in which
+case the sensors can be kept separate of each other. So the program writes to
+all sensors at one time and reads on different GPIO pins
+
 \subsection{Recommendations}
+We would recommend using a multiplexer if it's desired to have even more
+sensors, in other cases using different GPIO pins for each sensor will suffice.
 
 \section{Fans}
 \label{sec:fans}
 \subsection{Hardware}
+The fans are used to blow the air through the handling tunnel into the room.
+There are two fans in our air handling unit, one to take air into the handling
+tunnel and one at the end of the handling tunnel just before the air enters the
+room. We placed the second fan so that the intake air doesn't go into the
+tunnel for return air, but goes straight into the room. 
+
+The kind of fan they use in a real air handling unit is way too powerful and
+too big for our mock-up. In fact, almost all normal fans are too big for our
+purpose. To solve this problem we came up with a computer fan, which are small
+but still relatively powerful. 
+
+The only important specification for the fan are the sizes and that the rpm
+must be controllable, so that the intake of air can be controlled.
+
+After some research, we came to the Aerocool Shark Fan, which is depicted in
+Figure \ref{fig:fan}. With its \SI{12}{\cm} diameter it will fit into the
+\SI{15x15}{\cm} handling tunnel. Because of its three pin connection it is
+possible to control the rpm.  As stated in the functional requirements, the air
+handling unit needs to be able to refresh the room at least three times per
+hour. That came down to the fan needing to be capable of moving
+\SI{104.2}{\cm\cubed} air per hour. As visible in Table \ref{tab:fan}, the
+Aerocool Shark Fan has an maximum airflow of \SI{140.3}{\metre\cubed\per\hour},
+which is more than enough to refresh the room three times per hour. The fan of
+choice actually is a bit overpowered but the air we need to move to refresh the
+room three times per hour is very low, which makes almost every computer fan
+suitable for out mock-up, as long as the rpm is controllable. 
+
+A last argument is that the fan is not that expensive and has a good
+availability at several webshops.
+
+\begin{table}[]
+\centering
+\makebox[\textwidth][c]{
+\begin{tabular}{ll}
+Power connection & 3-pin                             \\
+Voltage range    & \SIrange{7}{12}{\volt}            \\
+Maximum rpm      & 1500 rpm                          \\
+Volume           & \SIrange{12.6}{26.5}{\decibel}    \\
+Maximum airflow  & \SI{140.3}{\metre\cubed\per\hour} \\
+Power            & \SI{3.6}{\watt}                    \\
+sizes(WxHxD)     & \SI{120x120x25}{\mm}
+\end{tabular}
+}
+\caption{Aerocool Shark Fan specifications \protect\cite{aerocool}}
+\label{tab:fan}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fan.jpg}
+\caption{Aerocool Shark Fan \protect\cite{aerocool}}
+\label{fig:fan}
+\end{figure}
+
+However, due to ordering problems, we decided to use some cheap \SI{120}{\mm}
+pc fans which we had laying around. The fans have been installed on either side
+of the intake tube. These are connected to the power supply via two TIP120
+transistors. While these were not powerful enough for the heating and cooling
+elements, they are powerful enough for the fans.
+
 \subsection{Software}
+The code for the fans is very similar to that of the heating and cooling
+elements. It also uses the PWM class to send a PWM signal, and it has a
+\lstinline|SetValue()| function which limits the value to within an acceptable
+range.  However, for the fans, we found that the acceptable range was between 0
+and 100.
+
+\lstinputlisting{code/fan-setvalue.cpp}
+
 \subsection{Problems}
+We didn't run into any problems with the fans. We however had some problems
+with some wiring (we shorted a wire) but this was quickly discovered and fixed.
+
 \subsection{Recommendations}
 
 \section{Vents}
