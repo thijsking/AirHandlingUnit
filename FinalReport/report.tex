@@ -1158,9 +1158,49 @@ that are included with the current prototype.
 
 \section{Power supply}
 \subsection{Hardware}
-\subsection{Software}
+To power the entire system, we needed a strong and reliable power supply, which
+would be easy to connect and control. To do this, we chose to use an ATX power
+supply, because they are widely available (being used in practically all
+desktop computers). They are also generally well-documented, both in terms of
+connections and interfaces and concerning the power draw capabilities. After
+adding up the power requirements of the components, we concluded we would be
+drawing a maximum of just over \SI{500}{\watt}. This power is mainly for the
+heating elements (two elements at \SI{180}{\watt} each) and the cooling element
+(at \SI{130}{\watt}). The controller can draw about \SI{13}{\watt}, the fans
+draw less than \SI{4}{\watt} each, and the sensors all draw less than
+\SI{2}{\watt}, with the humidity sensors drawing a negligible
+\SI{650}{\micro\watt}.
+
+With the total coming just over \SI{500}{\watt}, we decided to look for a
+\SI{650}{\watt} power supply, because ATX power supplies are at their best
+performance when their power draw is between \SI{70}{\percent} and
+\SI{80}{\percent} of their maximum power draw. Because we have to work with a
+limited budget, we started looking at power supplies in order of price.
+However, the first power supply unit (PSU) we came across already fit all of
+our requirements, while being significantly cheaper than the next power supply
+in the list. This was the Sharkoon SHP650 v2, which we decided on buying.
+
+While ordering the components we found out that ordering PC components would be
+a bigger problem than expected. Due too this we were forced to use a power
+supply a project member had laying around so we could continue with the
+building process. Near the end of the building process, we managed to purchase
+a power supply, this time a LC-Power LC420H-12 PSU. This power supply is
+capable of delivering \SI{420}{\watt} instead of the calculated
+\SI{650}{\watt}. We decided this would not be a problem, because we had not
+noticed any issues using the old temporary power supply, which was rated at
+only \SI{230}{\watt}. Swapping out the temporary power supply with the new one
+was practically effortless.	
+
 \subsection{Problems}
+The only problem we encountered during the installation of the power supply we
+shorted a wire which caused  the  power supply to stop working for a while, but
+fortunately the power supply has a built-in protection and kept working after
+we cleared it. 
+
 \subsection{Recommendations}
+We would highly recommend using a PC ATX power supply due to its tough nature,
+it won't break the power supply and/or breaker box when shorted and wiring
+is easy since it delivers the desired voltages natively.
 
 \chapter{Software}
 \label{ch:software}
