@@ -1001,12 +1001,12 @@ The fans are used to blow the air through the handling tunnel into the room.
 There are two fans in our air handling unit, one to take air into the handling
 tunnel and one at the end of the handling tunnel just before the air enters the
 room. We placed the second fan so that the intake air doesn't go into the
-tunnel for return air, but goes straight into the room. 
+tunnel for return air, but goes straight into the room.
 
 The kind of fan they use in a real air handling unit is way too powerful and
 too big for our mock-up. In fact, almost all normal fans are too big for our
 purpose. To solve this problem we came up with a computer fan, which are small
-but still relatively powerful. 
+but still relatively powerful.
 
 The only important specification for the fan are the sizes and that the rpm
 must be controllable, so that the intake of air can be controlled.
@@ -1022,7 +1022,7 @@ Aerocool Shark Fan has an maximum airflow of \SI{140.3}{\metre\cubed\per\hour},
 which is more than enough to refresh the room three times per hour. The fan of
 choice actually is a bit overpowered but the air we need to move to refresh the
 room three times per hour is very low, which makes almost every computer fan
-suitable for out mock-up, as long as the rpm is controllable. 
+suitable for out mock-up, as long as the rpm is controllable.
 
 A last argument is that the fan is not that expensive and has a good
 availability at several webshops.
@@ -1070,13 +1070,91 @@ and 100.
 We didn't run into any problems with the fans. We however had some problems
 with some wiring (we shorted a wire) but this was quickly discovered and fixed.
 
-\subsection{Recommendations}
-
 \section{Vents}
 \subsection{Hardware}
+To control where the air goes to, we have decided to use vents. By using these
+vents we could potentially return exhaust air into the intake tube to be mixed
+with fresh air or maybe run the system on a loop where there is no fresh air
+taken from outside. While researching the possible options for these vents, the
+conclusion could be made that there are no off the shelf electrically
+controlled air vents. So the task to research this component instantly became
+bigger. The task was no longer for only a controllable vent but for a manual
+controllable vent and a way to automate this so its electronically controlled.
+Within this task there were multiple manual vent options as seen in Table
+\ref{tab:vents}.
+
+\begin{table}[]
+\centering
+\makebox[\textwidth][c]{
+\begin{tabular}{l|p{3cm}p{3cm}p{3cm}p{3cm}}
+                  & Sliding Vent                                       & Butterfly Vent                                      & Self-made latch mechanism                       & Self-made car-style vent   \\ \hline
+Graphical example & \includegraphics[width=2.8cm]{images/slide.png}    & \includegraphics[width=2.8cm]{images/butterfly.png} & \includegraphics[width=2.8cm]{images/latch.png} & \includegraphics[width=2.8cm]{images/carstyle.png} \\
+                  & \cite{slidingvent}                                 & \cite{butterflyvent}                                & \cite{latchvent}                                & \cite{carstylevent} \\
+Positives         & Fairly easy to add servo in the middle to automate & Air tight sealed when closed                        & Fairly cheap                                    & Fairly Cheap               \\
+                  & Desired dimensions easily found                    & Airflow highly controllable                         & Not too difficult to build                      & Not too difficult to build \\
+                  & Fairly cheap                                       &                                                     &                                                 & Much more airflow control if compared to the ``Self-made latch mechanism'' \\   
+Negatives         & Amount of airflow compromised even when fully open & Expensive                                           & Making it close air tight could be challenging  & Making it close air tight could be challenging  \\
+                  &                                                    & Very difficult to add servo for automation          &                                                 & Required precision work with small pieces (doing something wrong while building it is very easy) \\
+Price             & \euro 11,99                                        & \euro 49,99                                & N/A                                            & N/A
+\end{tabular} %TODO fill in those cites
+}
+\caption{Comparison of vent options}
+\label{tab:vents}
+\end{table}
+
+While looking at this table the decision was made to use the ``Sliding Vent''
+option and use a servo in place of the manual knob to automate it. When this
+was discussed with the client, he expressed the fact that it would compromise
+airflow when fully open and he requested to come with another option. 
+
+The next best option was the ``Self-made car-style vent''. While this vent is
+more labour intensive and harder to automate than the ``Sliding Vent'', this vent
+will have near to none airflow compromise when fully open. For the building of
+this vent, there will be some slats which can rotate to open and close that
+given passageway. The technical side is that the slats will be rotated with a
+servo motor, more about which servo in the next paragraph of this chapter. The
+servo motor will be connected to all the slats via a rod or stick which can
+rotate all slats at once. By doing this we will be able to set the servo at a
+given angle by which will rotate and either open or close depending the set
+angle. 
+
+Looking at the servos needed with all the options for the vents, the decision
+was made to use the simplest servo that is adequate for our requirements,
+because we do not need anything more expensive or complicated. The servos also
+need to be capable of rotating the desired amount of degrees. After setting
+these requirements, we found out that there are two main types of motor: the
+servo type and the stepper motor type. As the stepper motor needs a driver and
+its only main advantage is a more precise control, we went with the servo
+motor. Whe chose the Modelcraft MC1811. It met the requirements set before, was
+in stock and within budget. 
+
+We installed and wired the servos to the Raspberry Pi while the power was
+delivered by the power supply. After this we started to think about how to make
+the vent mechanism. However at this point we were so late in the building
+phase, and since we could not come up with a good way of manufacturing the
+pieces, we decided together with the client that the vents would not be
+implemented in this project, and that we should focus on the api and other
+software components.
+
 \subsection{Software}
+The software for the vents needs to control the servos. For this, we can use
+the PWM class. However, because of the strict timing requirements of the
+servos, the PWM class needs to be modified. Due to a lack of time, this has not
+yet been done. Therefore, at the moment of writing, the servos can not yet be
+controlled.
+
 \subsection{Problems}
+We ran into quite a lot of problems with the vents, first our initial design
+restricted to much airflow according to the client. Then we could not find a
+replacement design that would and that could be delivered in time. After this
+we decided to build our own but this ended up being too much of a job to tackle
+with available knowledge and building skills. So we did not end up with a
+working prototype for the vents.
+
 \subsection{Recommendations}
+We would recommend finding someone with the required skills to design and build
+a vent which would work with the design. Preferably while using the servo’s
+that are included with the current prototype.
 
 \section{Power supply}
 \subsection{Hardware}
