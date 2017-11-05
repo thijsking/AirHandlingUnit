@@ -7,6 +7,8 @@ all:
 	@printf "\n********************************\n\n"
 	pdflatex report.tex
 	@printf "\n********************************\n\n"
+	pdflatex report.tex
+	@printf "\n********************************\n\n"
 	$(MAKE) clean
 clean:
 	rm -f *.aux
