@@ -107,7 +107,7 @@ perform the basic functions, there are ways to make a room even hotter than the
 sun. This is of course not physically possible. That's why we were given the
 task to create a scaled down model of a normal sized air handling unit.
 Designing, building and coding the system to be working at the demonstration
-all need to be done within this assignment. 
+all need to be done within this assignment.
 
 Designing the build was the first thing addressed during the project. During
 this stage research had to be done on what components would be used, which type
@@ -308,7 +308,7 @@ down the components without powering off the Raspberry Pi.
 \label{sec:case}
 \subsection{Hardware}
 For the building materials the choice came down to three choices: metal, wood
-and plastic. 
+and plastic.
 
 \begin{table}[]
 \centering
@@ -324,7 +324,7 @@ Advantages    & Very sturdy                         & Not affected by temperatur
 Disadvantages & Affected by temperature             & Affected by water             & Hard to mount together   \\
               & Hard to shape                       & Not as sturdy as metal        & Affected by temperature  \\
               & Chance of electrical short-circuits &                               & Low availability         \\
-              & As TI hard to weld together         &                               &                         
+              & As TI hard to weld together         &                               &
 \end{tabular}
 }
 \caption{Comparison of materials}
@@ -557,7 +557,7 @@ transistors but these are only rated for \SI{5}{\ampere} \cite{Transistor}
 Since our heating elements each pull more than \SI{5}{\ampere} \cite{Heating}
 the transistor heated up and melted. After this we did not use the transistors
 to control the heating element anymore and tested the api software using a
-voltmeter. 
+voltmeter.
 
 \subsection{Recommendations}
 We would recommend using a mosfet like FQP30N06L. These are rated for up to
@@ -566,7 +566,7 @@ heating elements. However this only covers a very simple use case and to safely
 and efficiently implement this we would recommend someone with the required
 knowledge of electronics  to design an analog circuit which can handle the high
 frequency pwm without potentially breaking the power supply and maybe even
-separate the elements completely from the Raspberry Pi.   
+separate the elements completely from the Raspberry Pi.
 
 \section{Cooling element}
 \label{sec:cooling}
@@ -598,7 +598,7 @@ Max. current           & \SI{8.5}{\A}             & \SI{3.9}{\A}             \\
 Wattage (max.)         & \SI{72}{\W}              & \SI{64}{\W}              \\
 Temperature difference & \SI{71}{\K}              & \SI{71}{\K}              \\
 Sizes                  & \SI{40x40x3.4}{\mm}      & \SI{40x40x3.6}{\mm}      \\
-Price                  & \euro 43,54              & \euro 61,01                 
+Price                  & \euro 43,54              & \euro 61,01
 \end{tabular}
 }
 \caption{Comparison of materials}
@@ -736,7 +736,7 @@ each individual sensor, we routed them through the case. The wires are capped
 off at each end with headers so we can easily swap out components if they
 break. The power for the sensors is supplied by the power supply, and is routed
 through the breadboard to the sensors. This was needed because the Raspberry Pi
-was not capable of delivering the required power. 
+was not capable of delivering the required power.
 
 \subsection{Software}
 \subsubsection{Sensors}
@@ -913,13 +913,13 @@ to find a solution. By wiring the transmit pin to both sensors and the receive
 wires to different pins on the Raspberry Pi we could distinguish between the
 two sensors. These wires were also incorporated into the cable harness but due
 to them working on \SI{5}{\volt} instead of the \SI{3.3}{\volt} on which the
-I2C works they needed a different power line. 
+I2C works they needed a different power line.
 
 \subsection{Software}
 The chosen hardware, MH-Z19, has 2 manners of sending data to the Raspberry Pi.
 The first being a PWM signal and the second being UART. After researching the
 possibilities we decided on working with UART. This way of communicating is in
-this case only used for the \ce{CO2} sensors. 
+this case only used for the \ce{CO2} sensors.
 
 \subsubsection{Serial}
 To get serial communication working on a Raspberry Pi which is running Linux, a
@@ -970,7 +970,7 @@ the \ce{CO2} specific decoding is done and the global variables are set.
 The \ce{CO2} sensors have a specific class as well. This class is for the component
 management and is used to handle the received data. As a class itself this
 isn't the most complicated class because a part of the handling is done by the
-serial class. 
+serial class.
 
 The main function of the class, \lstinline|getValue()| can be seen below:
 
@@ -1092,7 +1092,7 @@ Graphical example & \includegraphics[width=2.8cm]{images/slide.png}    & \includ
                   & \cite{slidingvent}                                 & \cite{butterflyvent}                                & \cite{latchvent}                                & \cite{carstylevent} \\
 Positives         & Fairly easy to add servo in the middle to automate & Air tight sealed when closed                        & Fairly cheap                                    & Fairly Cheap               \\
                   & Desired dimensions easily found                    & Airflow highly controllable                         & Not too difficult to build                      & Not too difficult to build \\
-                  & Fairly cheap                                       &                                                     &                                                 & Much more airflow control if compared to the ``Self-made latch mechanism'' \\   
+                  & Fairly cheap                                       &                                                     &                                                 & Much more airflow control if compared to the ``Self-made latch mechanism'' \\
 Negatives         & Amount of airflow compromised even when fully open & Expensive                                           & Making it close air tight could be challenging  & Making it close air tight could be challenging  \\
                   &                                                    & Very difficult to add servo for automation          &                                                 & Required precision work with small pieces (doing something wrong while building it is very easy) \\
 Price             & \euro 11,99                                        & \euro 49,99                                & N/A                                            & N/A
@@ -1105,7 +1105,7 @@ Price             & \euro 11,99                                        & \euro 4
 While looking at this table the decision was made to use the ``Sliding Vent''
 option and use a servo in place of the manual knob to automate it. When this
 was discussed with the client, he expressed the fact that it would compromise
-airflow when fully open and he requested to come with another option. 
+airflow when fully open and he requested to come with another option.
 
 The next best option was the ``Self-made car-style vent''. While this vent is
 more labour intensive and harder to automate than the ``Sliding Vent'', this vent
@@ -1116,7 +1116,7 @@ servo motor, more about which servo in the next paragraph of this chapter. The
 servo motor will be connected to all the slats via a rod or stick which can
 rotate all slats at once. By doing this we will be able to set the servo at a
 given angle by which will rotate and either open or close depending the set
-angle. 
+angle.
 
 Looking at the servos needed with all the options for the vents, the decision
 was made to use the simplest servo that is adequate for our requirements,
@@ -1126,7 +1126,7 @@ these requirements, we found out that there are two main types of motor: the
 servo type and the stepper motor type. As the stepper motor needs a driver and
 its only main advantage is a more precise control, we went with the servo
 motor. Whe chose the Modelcraft MC1811. It met the requirements set before, was
-in stock and within budget. 
+in stock and within budget.
 
 We installed and wired the servos to the Raspberry Pi while the power was
 delivered by the power supply. After this we started to think about how to make
@@ -1153,7 +1153,7 @@ working prototype for the vents.
 
 \subsection{Recommendations}
 We would recommend finding someone with the required skills to design and build
-a vent which would work with the design. Preferably while using the servo’s
+a vent which would work with the design. Preferably while using the servos
 that are included with the current prototype.
 
 \section{Power supply}
@@ -1189,13 +1189,13 @@ capable of delivering \SI{420}{\watt} instead of the calculated
 \SI{650}{\watt}. We decided this would not be a problem, because we had not
 noticed any issues using the old temporary power supply, which was rated at
 only \SI{230}{\watt}. Swapping out the temporary power supply with the new one
-was practically effortless.	
+was practically effortless.
 
 \subsection{Problems}
 The only problem we encountered during the installation of the power supply we
 shorted a wire which caused  the  power supply to stop working for a while, but
 fortunately the power supply has a built-in protection and kept working after
-we cleared it. 
+we cleared it.
 
 \subsection{Recommendations}
 We would highly recommend using a PC ATX power supply due to its tough nature,
@@ -1205,23 +1205,276 @@ is easy since it delivers the desired voltages natively.
 \chapter{Software}
 \label{ch:software}
 \section{API}
+We decided to create an API structure for the software. All the control and
+communication of the components will be taken care of in the API
+implementation. By doing it this way, the students can implement their
+mathematical model for controlling the air in the room, but they do not need to
+worry about the communication between the components and the Raspberry Pi.
+Another reason for this is that we can make sure that all the components will
+work and communicate correctly, so when we deliver the air handling unit with
+the API, you will get a working unit. See Appendix 10.A. for the software
+design.
+
+We divided the unit into three categories: actuators, sensors and
+communication. All the components that are controllable belong under the
+actuator category, such as the heating elements and the fans. The components
+that give data belong under the sensor category, these are all the sensors. As
+last we have the communication category. All the components have a different
+way of communicating, like I2C or UART for example. These communication methods
+are put within the communication category.
+
+To keep the code expandable and clear, the categories are translated to an
+interface. Behind the interfaces are all the different kinds of sensors,
+actuators or communication methods defined as a class. The actuator and sensor
+classes both have a communication member, so that it is easy to see which
+sensor or actuator has which kind of communication method. During the
+implementation the discovery was made that by using the iActuator class as an
+interface, there would be duplicated code in the inherited classes. Therefore
+the iActuator class transformed from an ABC class to a base class. In this way,
+the code that's the same for all the classes will be placed in the iActuator
+class to prevent duplicate code.
+
+Because we went for an API design, we wanted a master class. This master class,
+named Controller, is the only class people can talk to. The Controller will
+take care of the rest. This means everybody only needs to talk to the
+Controller, and they do not need to worry about the rest. For example, when
+somebody wants to set heating element 1 to its maximum capacity, it can say
+that to the Controller and the Controller will pass it on to the heating
+element.  The Initialize function from the Controller will create all the
+components that are in the air handling unit. The Controller saves all the
+components into two maps, a SensorMap for all the sensors and an ActuatorMap
+for all the actuators. So when somebody asks the controller to set a particular
+actuator, it will be able to find it in the map. The code for the
+\lstinline|SetActuatorValue| is as follows:
+
+\lstinputlisting{code/controller-setactuatorvalue.cpp}
+
+The function searches through the map for the actuator name. When it finds the
+component, the function calls the \lstinline|SetValue| function from the found
+actuator. The \lstinline|GetSensorValue| does something similar, with the
+differences that it runs through a list of all the sensors, and that it returns
+a map with all the sensor names and corresponding values in it.
+
+\lstinputlisting{code/controller-getsensorvalue.cpp}
+
+To make sure the outside classes who use the API all keep talking to the same
+Controller (and thus to the same components behind it), a ControllerBuilder
+class is created. The ControllerBuilder class is the one who creates the
+Controller. A random class can ask the Builder to give the Controller and set
+its own Controller member with this information. The ControllerBuilder has a
+static Controller member named Instance. The first time a class calls the
+GetController function, the ControllerBuilder will create the Controller and
+set its own Instance member it. The next time a class calls the function, the
+Instance is already initialized so the ControllerBuilder can directly return
+the Instance. The code looks as follow:
+
+\lstinputlisting{code/controllerbuilder-getcontroller.cpp}
+
+Looking back at it now, it would have been a better choice to remove the
+ControllerBuilder and convert the Controller to a singleton. This is a pattern
+which we learned halfway during the project. At this time the design had
+already been made and pieces were implemented. The singleton does in principle
+the same as the ControllerBuilder, only with one class fewer.
+
 \section{Control software}
+\label{sec:control}
+With the API alone, it is not possible to operate the air handling unit. You
+need something that talks width the API to control the actuators inside the
+unit. Therefore we decided to make a control application in combination with a
+user interface, in this case a web based interface. By making this application
+we create an example for the other students that are going to use this system,
+the mock-up with the API software. They can see in this application how the
+control software communicates with the API and how the flow is. The mathematics
+in the code that are necessary for a good automatic control system are going to
+be poor from our side, because we don't have the correct expertise for that.
+The students who are going to use it do have the correct expertise, so they can
+correct and expand that part. The important thing is that they can see how it
+works in combination with the API and show them a way to do it.
+
+The application is relatively simple, just because it is a way to show that the
+API works and because the fact that it is an example application. In appendix
+10.B is the class diagram shown of the control application. There are two ways
+of controlling the air handling unit, manual and automatic. Therefore there are
+two classes which inherit from the Control interface. The SettingReader is a
+static class which is being used by the Automatic and Manual class. The
+functionality of the SettingReader class consist of reading and writing to
+several files. The control application communicates through these files with
+the web interface. The files contain the values of all the sensors and
+actuators.
+
+The update function from Manual control is shown in appendix 10.C as a sequence
+diagram. In the show cycle is there has been a change in a fan setting. The
+\lstinline|settingchanged| file is being checked first. Instead of checking
+every file every cycle, it only checks the settingchanged file. The contents of
+this file include which actuator value has been changed. The file is empty when
+there are no changes. In this scenario the file will contain \lstinline|fan|.
+Because there has been change, the WriteActuatorValue function is called with
+fan as a parameter.  Now the system knows it needs to check the fan file for
+the value of the changed fan. This is done by the SettingReader class. This
+function, ReadSettings, will return a map with the fan name and the
+corresponding value.  The name is necessary for the Controller to find the
+correct fan. So the name and value are passed on to the Controller who takes
+care of the rest. The Controller finds the correct fan through its name. The
+fan class will then do some checks on the given value to make sure it is a
+correct value and passes it through to its base class, iActuator,  who will
+eventually send the value via its communication method to the actual fan.
+
+The next thing is updating the sensor values for the web interface. The
+WriteSensorValues function of the SettingReader is called with as parameter the
+return map from the GetSensorValue function of the Controller.
+
+As last there is a check if it is time to log all the sensor values. For
+educational reasons the application logs all the values of the sensors every
+ten seconds, so students can look back at how the values changed after a
+certain operation on the air.
+
+The code in the update function is as follow:
+
+\lstinputlisting{code/manual-update.cpp}
+
+The SettingReader::CheckChangedSettings() function returns a map with the
+component name and a true if it's existing in the settingchanged file.
+
+\lstinputlisting{code/manual-writeactuatorvalue.cpp}
+
+\lstinputlisting{code/manual-logsensorvalues.cpp}
+
+Unfortunately the Automatic class is not implemented. This has to do with the
+limited time we had when all the components were installed into the unit. There
+was not enough time to create and check the control system for an automatic
+control. We did the writing of the code and the building of the unit
+simultaneously, but you need a working unit to test the automatic control,
+while for the manual mode the testing can be done with the loose components. We
+saw this coming and discussed it with the product owner. He told us it is
+unfortunate, but the most important thing for him was that the software which
+was controlling the unit, so the API, was working and that we laid a solid base
+for other students to work with. By finishing the manual control we could show
+that the API was working correctly.
+
 \section{Webdesign}
+To interface with the control software, we chose to go the route of using a web
+page. By using a web page access is granted for all users connected to the
+network and there is no need for software on the host pc except for a standard
+web browser. Using this webpage, the user can perform basic tasks to adjust or
+read data from the air handling unit. For example the operation mode can be
+chosen within the webpage, the website gets the user input, saves it in a
+specified file and changes a file that specifies which variable changed within
+the system. The usage of this extra file that specifies the change is explained
+in Section \ref{sec:control} - Control software. Like this all the other
+working values (speed, working percentage) of each component can be changed.
+
+The webpage also has a section that displays all the values of the different
+sensors that are present within the unit. While this shows that the API works,
+this can also be very helpful when students are implementing their own code and
+want to see the actual values of the sensors. The only disadvantage on this
+example is that the web page would only work with the manner of information
+that the by us created control software delivers. This could be copied to a new
+project or the control software could be used to display information only (for
+when students want to implement their own control software and don't want to
+use the control side of our control software).
+
+As example for the web code, the code for changing the operating mode is seen
+below:
+
+\lstinputlisting[language=php]{code/operatingmode.php}
+
+Line 9 to 13 are used to read the file that specifies the operation mode. The
+webpage reads this before any changes to display the current operation mode.
+This would therefore be displayed at any time. The implementation of this can
+be found on lines 49 to 51.
+
+Then lines 14 and 15 declare 2 variables that are used within the program. At
+line 17 the webpage checks if the user has done an input. This is necessary
+because the page is also used as display for the current operation mode as
+stated before. If the user has changed the operation mode, the page checks to
+which operation mode is switched. After this the chosen operation mode is
+written to the specified file and the general \lstinline|settingChanged.txt|
+file is also changed to signal the control software that a setting changed.
+
+In line 36 to 41 the page checks if there is a new operation mode (stored in
+variable \lstinline|value|) and sets the display variable to this value. This
+way the new operation mode is directly displayed. If there is no new operation
+mode chosen and the file was empty as well (in case of starting the system),
+the display variable is set to \lstinline|NULL|. If this variable is
+\lstinline|NULL|, the web page does not display the current value.
+
+In Figure \ref{fig:webpage} a snapshot of the webpage is seen. It is a snapshot
+of the page where the user can select the operation mode. At the left side all
+the components and subjects can be selected. The main part is where the user
+can select the operation mode and see the current value.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{images/webpage.png}
+\caption{A part of the webpage that controls the AHU}
+\label{fig:webpage}
+\end{figure}
 
 \chapter{Conclusion}
+%TODO
+
 \chapter{Evaluation and reflection}
+In the beginning of the project, we decided to use Scrum as our methodology.
+After a few weeks, however, we noticed that Scrum might not have been the best
+methodology for the first parts of the project. What we actually needed was
+more of a waterfall-like method, with a research phase, a design phase, and a
+build phase. This would have enabled us to get a functional prototype up and
+running within the first six to eight weeks of the project. After that, we
+could have switched to Scrum to iterate on the project and improve it in small
+steps.
+
+However, by the time we figured this out, we were already close to done with
+building the prototype, so we decided not to switch away from Scrum, because we
+would have needed to switch back only a few weeks later. This means that the
+first three or four sprints were not actually sprints, because they did not
+have a deliverable product at the end of the sprint.
+
+Another problem we had was with the speed of the project. We regularly had
+delays, mainly in the process of ordering components. These delays were partly
+caused by ourselves, and partly by the bureaucracy of the ordering process.
+Some of the delays were caused by the web shops where we ordered. All of these
+delays added up, which means that in the end, some of the components were only
+delivered a few days before our demonstration. Due to the fact that we had
+already implemented almost all of the API, we were able to get most of the
+prototype working for the demonstration, but we feel that we cut it a little
+too close.
+
 \chapter{Bibliography}
 \bibliographystyle{apacite}
 \bibliography{bibliography.bib}
 
 \appendix
 \chapter{API Design}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.66\textwidth]{images/apidesign.png}
+\end{figure}
+
 \chapter{Control Software}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{images/control.png}
+\end{figure}
 \chapter{Manual Control}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.53\textwidth]{images/manualcontrol.png}
+\end{figure}
+
 \chapter{Plan of Approach}
 \label{app:plan-of-approach}
+Please see the file ``pva.pdf''
+
 \chapter{API Code tutorial}
+Please see the file ``AHU API manual.pdf''
+
 \chapter{Case tutorial}
+Please see the URL \url{http://www.instructables.com/id/Project-AHU/}
+
 \chapter{API Code documentation}
+All of the API code has been documented using Doxygen. For the resulting
+document, please see the file ``refman.pdf'', or the URL
+\url{http://ahu.rchard2scout.nl/} (also available on Archive.org:
+\url{https://web.archive.org/web/20171105001731/http://ahu.rchard2scout.nl/}).
 
 \end{document}
