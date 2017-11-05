@@ -181,8 +181,9 @@ In the first meeting with the client, he indicated he wanted a chamber size of
 approximately \SI{50x50x50}{\cm}. He also expressed the wish that the
 specifications of the mock-up unit should be similar to those of real air
 handling units. The desired chamber size leads to a volume of \SI{125}{\L}.
-During our excursion to Systemair %TODO
-, we discovered that an air handling unit is
+During our excursion to Systemair \footnote{Systemair Group is a worldwide
+manufacturer of heating, ventilation and airconditioning products. We visited
+their production facilities in Waalwijk.}, we discovered that an air handling unit is
 supposed to refresh all of the air in the building three times per hour.
 Plugging in those numbers leads to an airflow of \SI{375}{\L\per\hour}, or
 \SI{104.2}{\cm\cubed\per\s}. To simulate an air handling unit in Dutch weather,
@@ -510,16 +511,16 @@ However, these have not been delivered yet and could not be installed for this
 reason.
 
 \subsection{Software}
-To accurately control the heating elements, we are using a PWM signal to
-rapidly turn a transistor on and off. To do this, we created the PWM class,
-which we will explain first. This class implements the iCommunication
-interface, so it has the standard \lstinline|Initialize()|, \lstinline|Read()|
-and \lstinline|Write()| functions (lines 6, 8, 9). The \lstinline|Read()|
-function is empty on purpose, because it is not possible to read from a PWM
-pin. Due to the specifics of the softPwm API of the WiringPi library, we need a
-more sophisticated Initialize function which receives a list of pins that will
-be used for PWM signals.  Therefore, the standard \lstinline|Initialize()|
-function will always return false.
+To accurately control the heating elements, we are using a pulse-width
+modulation (PWM) signal to rapidly turn a transistor on and off. To do this, we
+created the PWM class, which we will explain first. This class implements the
+iCommunication interface, so it has the standard \lstinline|Initialize()|,
+\lstinline|Read()| and \lstinline|Write()| functions (lines 6, 8, 9). The
+\lstinline|Read()| function is empty on purpose, because it is not possible to
+read from a PWM pin. Due to the specifics of the softPwm API of the WiringPi
+library, we need a more sophisticated Initialize function which receives a list
+of pins that will be used for PWM signals.  Therefore, the standard
+\lstinline|Initialize()| function will always return false.
 
 \lstinputlisting{code/pwm-class.h}
 
@@ -1099,7 +1100,7 @@ Positives         & Fairly easy to add servo in the middle to automate & Air tig
 Negatives         & Amount of airflow compromised even when fully open & Expensive                                           & Making it close air tight could be challenging  & Making it close air tight could be challenging  \\
                   &                                                    & Very difficult to add servo for automation          &                                                 & Required precision work with small pieces (doing something wrong while building it is very easy) \\
 Price             & \euro 11,99                                        & \euro 49,99                                & N/A                                            & N/A
-\end{tabular} %TODO fill in those cites
+\end{tabular}
 }
 \caption{Comparison of vent options}
 \label{tab:vents}
@@ -1128,8 +1129,8 @@ need to be capable of rotating the desired amount of degrees. After setting
 these requirements, we found out that there are two main types of motor: the
 servo type and the stepper motor type. As the stepper motor needs a driver and
 its only main advantage is a more precise control, we went with the servo
-motor. Whe chose the Modelcraft MC1811. It met the requirements set before, was
-in stock and within budget.
+motor. Whe chose the Modelcraft MC1811 \cite{modelcraft}. It met the
+requirements set before, was in stock and within budget.
 
 We installed and wired the servos to the Raspberry Pi while the power was
 delivered by the power supply. After this we started to think about how to make
